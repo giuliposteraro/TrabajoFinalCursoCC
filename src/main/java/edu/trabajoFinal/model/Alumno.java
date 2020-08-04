@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
+import edu.trabajoFinal.model.Nivel.Nivel;
+
 public class Alumno {
 	private String nombre;
 	private String apellido;
@@ -18,6 +20,7 @@ public class Alumno {
 	private int dniMayor;
 	private String mailMayor;
 	private int telefonoMayor;
+	private Nivel nivel;
 	
 	public Alumno(String nombre, String apellido, CharSequence fechaNac, String mail, String obraSoc, int numSoc,
 			Image certMedico, String nombre2, String apellido2, int dni, String mail2, int tel) {
@@ -100,6 +103,55 @@ public class Alumno {
 	public void setCertMedico(Image certMedico) {
 		this.certMedico = certMedico;
 	}
+
+	public String getNombreMayor() {
+		return nombreMayor;
+	}
+
+	public void setNombreMayor(String nombreMayor) {
+		this.nombreMayor = nombreMayor;
+	}
+
+	public String getApellidoMayor() {
+		return apellidoMayor;
+	}
+
+	public void setApellidoMayor(String apellidoMayor) {
+		this.apellidoMayor = apellidoMayor;
+	}
+
+	public int getDniMayor() {
+		return dniMayor;
+	}
+
+	public void setDniMayor(int dniMayor) {
+		this.dniMayor = dniMayor;
+	}
+
+	public String getMailMayor() {
+		return mailMayor;
+	}
+
+	public void setMailMayor(String mailMayor) {
+		this.mailMayor = mailMayor;
+	}
+
+	public int getTelefonoMayor() {
+		return telefonoMayor;
+	}
+
+	public void setTelefonoMayor(int telefonoMayor) {
+		this.telefonoMayor = telefonoMayor;
+	}
+
+	public Nivel getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(Nivel nivel) {
+		this.nivel = nivel;
+	}
+	
 	
 	
 	
