@@ -1,6 +1,6 @@
 package edu.trabajoFinal;
 
-import java.util.logging.FileHandler;
+import java.io.IOException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +13,16 @@ public class App
 {
     public static void main( String[] args )
     {	
-    	LogFile log = new LogFile();
-    	FileHandler fh = new FileHandler("C:\\Users\\giuli\\eclipse-workspace\\TrabajoFinalCursoCC\\MyLog.log");
-    	log.addHandler(fh);
+    	try {
+			LogFile miLog = new LogFile("Log.txt");
+			miLog.log.info("---------------------------------Log------------------------------");
+			miLog.log.info("Log creado correctamente");
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
         SpringApplication.run(App.class, args);
     }
 }

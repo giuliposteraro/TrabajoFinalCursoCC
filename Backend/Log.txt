@@ -1,0 +1,4 @@
+ago 05, 2020 12:48:57 AM edu.trabajoFinal.App main
+INFORMACIÓN: ---------------------------------Log------------------------------
+ago 05, 2020 12:48:57 AM edu.trabajoFinal.App main
+INFORMACIÓN: Log creado correctamente

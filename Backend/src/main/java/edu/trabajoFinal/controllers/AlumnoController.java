@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,9 +22,9 @@ public class AlumnoController {
 	
 	@Autowired
 	private AlumnoRepository repoAlumnos;
+
 	
-	@Autowired
-	private LogFile log;
+	private static LogFile logger;
 	
 	@Autowired
 	private Respuesta respuesta;
@@ -44,12 +45,48 @@ public class AlumnoController {
 			repoAlumnos.save(alumno);
 			this.respuesta.setMensaje("Alumno cargado correctamente");
 			this.respuesta.setStatusCode(200);
-			
+			logger.log.info("Se dio de alta al alumno");
 		}
 		
 		catch(Exception e){
 			this.respuesta.setMensaje("El alumno no se cargo correctamente");
 			this.respuesta.setStatusCode(500);
+			logger.log.log(null, "Hubo un error y el alumno no se cargo correctamente", e);
+		}
+		return ResponseEntity.ok(this.respuesta);
+	}
+	
+	@PutMapping(value= "modificarAlumno")
+	public ResponseEntity<Respuesta> modificarAlumno(@RequestBody Alumno alumno){
+		try {
+			Alumno amodificar = this.repoAlumnos.findById(alumno.getId()).get();
+			amodificar.setNombre(alumno.getNombre());
+			amodificar.setApellido(alumno.getApellido());
+			//TODO poner todos los atributos
+			this.repoAlumnos.save(amodificar);
+			this.respuesta.setMensaje("Inserto el nombre correctamente");
+			this.respuesta.setStatusCode(200);
+		}
+		catch(Exception e) {
+			this.respuesta.setMensaje("Error al modificar");
+			this.respuesta.setStatusCode(500);
+		}
+		
+		return ResponseEntity.ok(this.respuesta);
+	}
+	
+	@DeleteMapping(value= "borrarAlumno")
+	public ResponseEntity<Respuesta> eliminarAlumno(@RequestBody Alumno alumno){
+		try {
+			repoAlumnos.deleteById(alumno.getId());
+			this.respuesta.setMensaje("Alumno eliminado correctamente");
+			this.respuesta.setStatusCode(200);
+			logger.log.info("Se elimino al alumno");
+		}
+		catch(Exception e){
+			this.respuesta.setMensaje("El alumno no se elimino correctamente");
+			this.respuesta.setStatusCode(500);
+			logger.log.log(null, "Hubo un error y el alumno no se elimino correctamente", e);
 		}
 		return ResponseEntity.ok(this.respuesta);
 	}

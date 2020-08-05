@@ -188,6 +188,10 @@ public class Alumno {
 	public void setNivel(Nivel nivel) {
 		this.nivel = nivel;
 	}
+
+	public Long getId() {
+		return this.id;
+	}
 	
 	
 	
