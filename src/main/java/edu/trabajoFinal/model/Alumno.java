@@ -5,21 +5,58 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import edu.trabajoFinal.model.Nivel.Nivel;
 
+@Entity
+@Table(name= "Alumnos")
 public class Alumno {
+	
+	@Id @GeneratedValue
+	private long id;
+	
+	@Column
 	private String nombre;
+	
+	@Column
 	private String apellido;
+	
+	@Column
 	private CharSequence fechaNac;
+	
+	@Column
 	private String mail;
+	
+	@Column
 	private String obraSoc;
+	
+	@Column
 	private int numSoc;
+	
+	@Column 
 	private Image certMedico;
+	
+	@Column
 	private String nombreMayor;
+	
+	@Column
 	private String apellidoMayor;
+	
+	@Column
 	private int dniMayor;
+	
+	@Column
 	private String mailMayor;
+	
+	@Column
 	private int telefonoMayor;
+	
+	@Column
 	private Nivel nivel;
 	
 	public Alumno(String nombre, String apellido, CharSequence fechaNac, String mail, String obraSoc, int numSoc,
