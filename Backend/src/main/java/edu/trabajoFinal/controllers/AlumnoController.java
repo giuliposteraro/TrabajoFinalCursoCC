@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,59 +13,63 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.trabajoFinal.log.LogFile;
-import edu.trabajoFinal.model.Alumno;
-import edu.trabajoFinal.model.Respuesta;
-import edu.trabajoFinal.repository.AlumnoRepository;
+import edu.trabajoFinal.dao.AlumnoDTO;
+import edu.trabajoFinal.repository.AlumnoDTORepository;
+import edu.trabajoFinal.response.Response;
 
+@CrossOrigin
 @RestController
 public class AlumnoController {
 	
 	@Autowired
-	private AlumnoRepository repoAlumnos;
+	private AlumnoDTORepository repoAlumnos;
 
 	
-	private static LogFile logger;
-	
 	@Autowired
-	private Respuesta respuesta;
+	private Response respuesta;
 	
-	@GetMapping(value= "obtenerAlumnos")
-	public List<Alumno> obtenerAlumnos(){
+	@GetMapping(value= "alumnos")
+	public List<AlumnoDTO> obtenerAlumnos(){
 		return this.repoAlumnos.findAll();
 	}
 	
-	@GetMapping(value= "Alumno/{id}")
-	public Alumno obtenerAlumnoPorId(@PathVariable long id) {
+	@GetMapping(value= "alumnos/{id}")
+	public AlumnoDTO obtenerAlumnoPorId(@PathVariable int id) {
 		return this.repoAlumnos.findById(id).get();
 	}
 	
-	@PostMapping(value="altaAlumno")
-	public ResponseEntity<Respuesta> altaAlumno(@RequestBody Alumno alumno){
+	@PostMapping(value="alumnos")
+	public ResponseEntity<Response> altaAlumno(@RequestBody AlumnoDTO alumno){
 		try {
 			repoAlumnos.save(alumno);
 			this.respuesta.setMensaje("Alumno cargado correctamente");
 			this.respuesta.setStatusCode(200);
-			logger.log.info("Se dio de alta al alumno");
 		}
 		
 		catch(Exception e){
 			this.respuesta.setMensaje("El alumno no se cargo correctamente");
 			this.respuesta.setStatusCode(500);
-			logger.log.log(null, "Hubo un error y el alumno no se cargo correctamente", e);
 		}
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@PutMapping(value= "modificarAlumno")
-	public ResponseEntity<Respuesta> modificarAlumno(@RequestBody Alumno alumno){
+	@PutMapping(value= "alumnos/{id}")
+	public ResponseEntity<Response> modificarAlumno(@RequestBody AlumnoDTO alumno){
 		try {
-			Alumno amodificar = this.repoAlumnos.findById(alumno.getId()).get();
+			AlumnoDTO amodificar = this.repoAlumnos.findById(alumno.getNumSoc()).get();
 			amodificar.setNombre(alumno.getNombre());
 			amodificar.setApellido(alumno.getApellido());
-			//TODO poner todos los atributos
+			amodificar.setFechaNac(alumno.getFechaNac());
+			amodificar.setMail(alumno.getMail());
+			amodificar.setObraSoc(alumno.getObraSoc());
+			amodificar.setCertMedico(alumno.getCertMedico());
+			amodificar.setNombreMayor(alumno.getNombreMayor());
+			amodificar.setApellidoMayor(alumno.getApellidoMayor());
+			amodificar.setDniMayor(alumno.getDniMayor());
+			amodificar.setMailMayor(alumno.getMailMayor());
+			amodificar.setTelefonoMayor(alumno.getTelefonoMayor());
 			this.repoAlumnos.save(amodificar);
-			this.respuesta.setMensaje("Inserto el nombre correctamente");
+			this.respuesta.setMensaje("Modifico correctamente");
 			this.respuesta.setStatusCode(200);
 		}
 		catch(Exception e) {
@@ -75,18 +80,16 @@ public class AlumnoController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@DeleteMapping(value= "borrarAlumno")
-	public ResponseEntity<Respuesta> eliminarAlumno(@RequestBody Alumno alumno){
+	@DeleteMapping(value= "alumnos/{id}")
+	public ResponseEntity<Response> eliminarAlumno(@RequestBody AlumnoDTO alumno){
 		try {
-			repoAlumnos.deleteById(alumno.getId());
+			repoAlumnos.deleteById(alumno.getNumSoc());
 			this.respuesta.setMensaje("Alumno eliminado correctamente");
 			this.respuesta.setStatusCode(200);
-			logger.log.info("Se elimino al alumno");
 		}
 		catch(Exception e){
 			this.respuesta.setMensaje("El alumno no se elimino correctamente");
 			this.respuesta.setStatusCode(500);
-			logger.log.log(null, "Hubo un error y el alumno no se elimino correctamente", e);
 		}
 		return ResponseEntity.ok(this.respuesta);
 	}

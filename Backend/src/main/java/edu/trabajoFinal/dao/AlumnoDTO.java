@@ -1,6 +1,6 @@
-package edu.trabajoFinal.model;
+package edu.trabajoFinal.dao;
 
-import java.awt.Image;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -8,17 +8,20 @@ import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.swing.ImageIcon;
 
-import edu.trabajoFinal.model.Nivel.Nivel;
 
 @Entity
 @Table(name= "Alumnos")
-public class Alumno {
+public class AlumnoDTO {
 	
-	@Id @GeneratedValue
-	private long id;
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int numSoc;
 	
 	@Column
 	private String nombre;
@@ -27,7 +30,7 @@ public class Alumno {
 	private String apellido;
 	
 	@Column
-	private CharSequence fechaNac;
+	private String fechaNac;
 	
 	@Column
 	private String mail;
@@ -35,11 +38,9 @@ public class Alumno {
 	@Column
 	private String obraSoc;
 	
-	@Column
-	private int numSoc;
 	
 	@Column 
-	private Image certMedico;
+	private ImageIcon certMedico;
 	
 	@Column
 	private String nombreMayor;
@@ -57,33 +58,33 @@ public class Alumno {
 	private int telefonoMayor;
 	
 	@Column
-	private Nivel nivel;
+	private String nivel;
 	
-	public Alumno(String nombre, String apellido, CharSequence fechaNac, String mail, String obraSoc, int numSoc,
-			Image certMedico, String nombre2, String apellido2, int dni, String mail2, int tel) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.fechaNac = fechaNac;
-		this.mail = mail;
-		this.obraSoc = obraSoc;
-		this.numSoc = numSoc;
-		this.certMedico = certMedico;
-		if(this.edad() < 18) {
-			this.nombreMayor = nombre2;
-			this.apellidoMayor = apellido2;
-			this.dniMayor = dni;
-			this.mailMayor = mail2;
-			this.telefonoMayor = tel;
-		}
-	}
+//	public AlumnoDTO(String nombre, String apellido, String fechaNac, String mail, String obraSoc, int numSoc,
+//			ImageIcon certMedico, String nombre2, String apellido2, int dni, String mail2, int tel) {
+//		super();
+//		this.nombre = nombre;
+//		this.apellido = apellido;
+//		this.fechaNac = fechaNac;
+//		this.mail = mail;
+//		this.obraSoc = obraSoc;
+//		this.numSoc = numSoc;
+//		this.certMedico = certMedico;
+//		if(this.edad().getYears() < 18) { // si es menor de edad agrega los datos del tutor
+//			this.nombreMayor = nombre2;
+//			this.apellidoMayor = apellido2;
+//			this.dniMayor = dni;
+//			this.mailMayor = mail2;
+//			this.telefonoMayor = tel;
+//		}
+//	}
 	
-	public int edad() {
+	public Period edad() {
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate fechaNac = LocalDate.parse(this.fechaNac, fmt);
-		LocalDate hoy = LocalDate.now();
-		Period periodo = Period.between(fechaNac, hoy); 
-		return periodo.getYears();
+		LocalDate ahora = LocalDate.now();
+		Period periodo = Period.between(fechaNac, ahora);
+		return periodo;
 	}
 	public String getNombre() {
 		return nombre;
@@ -101,11 +102,11 @@ public class Alumno {
 		this.apellido = apellido;
 	}
 
-	public CharSequence getFechaNac() {
+	public String getFechaNac() {
 		return fechaNac;
 	}
 
-	public void setFechaNac(CharSequence fechaNac) {
+	public void setFechaNac(String fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 
@@ -133,11 +134,11 @@ public class Alumno {
 		this.numSoc = numSoc;
 	}
 
-	public Image getCertMedico() {
+	public ImageIcon getCertMedico() {
 		return certMedico;
 	}
 
-	public void setCertMedico(Image certMedico) {
+	public void setCertMedico(ImageIcon certMedico) {
 		this.certMedico = certMedico;
 	}
 
@@ -146,7 +147,9 @@ public class Alumno {
 	}
 
 	public void setNombreMayor(String nombreMayor) {
-		this.nombreMayor = nombreMayor;
+		if(this.edad().getYears() < 18) {
+			this.nombreMayor = nombreMayor;
+		}
 	}
 
 	public String getApellidoMayor() {
@@ -154,7 +157,9 @@ public class Alumno {
 	}
 
 	public void setApellidoMayor(String apellidoMayor) {
+		if(this.edad().getYears() < 18) {
 		this.apellidoMayor = apellidoMayor;
+		}
 	}
 
 	public int getDniMayor() {
@@ -162,7 +167,9 @@ public class Alumno {
 	}
 
 	public void setDniMayor(int dniMayor) {
+		if(this.edad().getYears() < 18) {
 		this.dniMayor = dniMayor;
+		}
 	}
 
 	public String getMailMayor() {
@@ -170,7 +177,9 @@ public class Alumno {
 	}
 
 	public void setMailMayor(String mailMayor) {
+		if(this.edad().getYears() < 18) {
 		this.mailMayor = mailMayor;
+		}
 	}
 
 	public int getTelefonoMayor() {
@@ -178,21 +187,18 @@ public class Alumno {
 	}
 
 	public void setTelefonoMayor(int telefonoMayor) {
+		if(this.edad().getYears() < 18) {
 		this.telefonoMayor = telefonoMayor;
+		}
 	}
 
-	public Nivel getNivel() {
+	public String getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(Nivel nivel) {
+	public void setNivel(String nivel) {
 		this.nivel = nivel;
 	}
-
-	public Long getId() {
-		return this.id;
-	}
-	
 	
 	
 	

@@ -1,9 +1,9 @@
-package edu.trabajoFinal.model;
+package edu.trabajoFinal.response;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class Respuesta {
+public class Response {
 	
 	private String mensaje;
 	private int statusCode;
