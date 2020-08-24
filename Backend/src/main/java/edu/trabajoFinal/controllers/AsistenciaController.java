@@ -19,7 +19,7 @@ import edu.trabajoFinal.response.Response;
 
 @CrossOrigin
 @RestController
-public class AsistenciaDTOController {
+public class AsistenciaController {
 	@Autowired
 	private AsistenciaDTORepository repoAsistencias;
 
@@ -27,17 +27,17 @@ public class AsistenciaDTOController {
 	@Autowired
 	private Response respuesta;
 	
-	@GetMapping(value= "asistencias")
+	@GetMapping(value= "asistencia")
 	public List<AsistenciaDTO> obtenerAsistencias(){
 		return this.repoAsistencias.findAll();
 	}
 	
-	@GetMapping(value= "asistencias/{id}")
+	@GetMapping(value= "asistencia/{id}")
 	public AsistenciaDTO obtenerAsistenciaPorId(@PathVariable int id) {
 		return this.repoAsistencias.findById(id).get();
 	}
 	
-	@PostMapping(value="asistencias")
+	@PostMapping(value="asistencia")
 	public ResponseEntity<Response> altaAsistencia(@RequestBody AsistenciaDTO asistencia){
 		try {
 			repoAsistencias.save(asistencia);
@@ -58,6 +58,7 @@ public class AsistenciaDTOController {
 			AsistenciaDTO amodificar = this.repoAsistencias.findById(asistencia.getId()).get();
 			amodificar.setCurso(asistencia.getCurso());
 			amodificar.setPresente(asistencia.isPresente());
+			amodificar.setNumSocio(asistencia.getNumSocio());
 			this.repoAsistencias.save(amodificar);
 			this.respuesta.setMensaje("Modifico correctamente");
 			this.respuesta.setStatusCode(200);

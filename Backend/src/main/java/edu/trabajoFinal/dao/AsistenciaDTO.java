@@ -16,6 +16,9 @@ public class AsistenciaDTO {
 	private int id;
 	
 	@Column
+	private String numSocio;
+	
+	@Column
 	private String curso;
 	
 	@Column
@@ -44,6 +47,15 @@ public class AsistenciaDTO {
 	public void setPresente(boolean presente) {
 		this.presente = presente;
 	}
+
+	public void setNumSocio(String numSocio) {
+		this.numSocio = numSocio;
+	}
+
+	public String getNumSocio() {
+		return numSocio;
+	}
+	
 	
 	
 }

@@ -58,6 +58,10 @@ public class CursoController {
 		try {
 			CursoDTO cmodificar = this.repoCursos.findById(curso.getId()).get();
 			cmodificar.setNivel(curso.getNivel());
+			cmodificar.setCategoria(curso.getCategoria());
+			cmodificar.setDias(curso.getDias());
+			cmodificar.setValor(curso.getValor());
+			cmodificar.setEdades(curso.getEdades());
 			this.repoCursos.save(cmodificar);
 			this.respuesta.setMensaje("Modifico correctamente");
 			this.respuesta.setStatusCode(200);

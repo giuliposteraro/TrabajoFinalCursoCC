@@ -13,9 +13,8 @@ export class AlumnoFormComponent {
   
 
   public alumno:Alumno;
-  formTutor: FormGroup;
-  menorEdad: boolean = true;
-  datosAlumno: any = null;
+
+ 
 
   constructor(private route: ActivatedRoute, 
               private router: Router,
@@ -33,16 +32,5 @@ export class AlumnoFormComponent {
     this.router.navigate(['/alumnos']);
   }
 
-  setAlumno(){
-    this.menorEdad = this.datosAlumno?
-    this.getEdad(this.datosAlumno.fechaNacimiento)<18 :
-    false;
-    }
-
-  getEdad(fecha: string){
-      let today = new Date(); 
-      let date = new Date(fecha);
-      return today.getFullYear() - date.getFullYear(); 
-    }
 
 }

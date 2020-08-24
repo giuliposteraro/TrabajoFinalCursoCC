@@ -68,7 +68,7 @@
         <option>Equipo</option>
       </select>
     </div>
-<div *ngIf="menorEdad" class="my-2" [formGroup]="formTutor">
+  <div *ngIf="alumno.menorEdad" class="form-control">
     <div class="form-group">
         <label for="nombreMayor">Nombre del tutor</label>
         <input type="text" [(ngModel)]="alumno.nombreMayor" 
@@ -76,7 +76,7 @@
           id="nombreMayor" 
           name="nombreMayor" 
           placeholder="Escriba el nombre de su tutor"
-          required #name="ngModel" disabled>
+          required #name="ngModel" required>
           <div class="invalid-feedback">Nombre invalido</div>
       </div>
      <div class="form-group">
@@ -86,7 +86,7 @@
           id="apellidoMayor" 
           name="apellidoMayor" 
           placeholder="Escriba el apellido de su tutor"
-          required #name="ngModel" disabled>
+          required #name="ngModel">
           <div class="invalid-feedback">Apellido invalido</div>
       </div>
      <div class="form-group">
@@ -96,7 +96,7 @@
           id="dniMayor" 
           name="dniMayor" 
           placeholder="Escriba el DNI de su tutor"
-          required #name="ngModel" disabled>
+          required #name="ngModel">
           <div class="invalid-feedback">DNI invalido</div>
       </div>
      <div class="form-group">
@@ -106,7 +106,7 @@
           id="mailMayor" 
           name="mailMayor" 
           placeholder="Escriba el mail de su tutor"
-          required #name="ngModel" disabled>
+          required #name="ngModel">
           <div class="invalid-feedback">Mail invalido</div>
       </div>
      <div class="form-group">
@@ -116,26 +116,16 @@
           id="telefonoMayor" 
           name="telefonoMayor" 
           placeholder="Escriba el número de telefono de su tutor"
-          required #name="ngModel" disabled>
+          required #name="ngModel">
           <div class="invalid-feedback">Telefono invalido</div>
       </div>
-     <div class="form-group">
-        <label for="obraSoc">Nombre del tutor</label>
-        <input type="text" [(ngModel)]="alumno.nombreMayor" 
-          class="form-control" 
-          id="nombreMayor" 
-          name="nombreMayor" 
-          placeholder="Escriba el nombre de su tutor"
-          required #name="ngModel" disabled>
-          <div class="invalid-feedback">Nombre invalido</div>
-      </div>
     </div>
-    <div class="form-check mb-2">
+<div class="form-check mb-2">
         <input class="form-check-input" type="checkbox" id="autoSizingCheck">
         <label class="form-check-label" for="autoSizingCheck">
           Recordar
         </label>
-    </div>
+</div>
       <button type="cargar" [disabled]="!alumnoForm.form.valid" class="btn btn-info">Cargar</button>
   </form>
   </div>

@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.swing.ImageIcon;
 
@@ -38,7 +37,6 @@ public class AlumnoDTO {
 	@Column
 	private String obraSoc;
 	
-	
 	@Column 
 	private ImageIcon certMedico;
 	
@@ -58,33 +56,18 @@ public class AlumnoDTO {
 	private int telefonoMayor;
 	
 	@Column
-	private String nivel;
+	private String curso;
 	
-//	public AlumnoDTO(String nombre, String apellido, String fechaNac, String mail, String obraSoc, int numSoc,
-//			ImageIcon certMedico, String nombre2, String apellido2, int dni, String mail2, int tel) {
-//		super();
-//		this.nombre = nombre;
-//		this.apellido = apellido;
-//		this.fechaNac = fechaNac;
-//		this.mail = mail;
-//		this.obraSoc = obraSoc;
-//		this.numSoc = numSoc;
-//		this.certMedico = certMedico;
-//		if(this.edad().getYears() < 18) { // si es menor de edad agrega los datos del tutor
-//			this.nombreMayor = nombre2;
-//			this.apellidoMayor = apellido2;
-//			this.dniMayor = dni;
-//			this.mailMayor = mail2;
-//			this.telefonoMayor = tel;
-//		}
-//	}
+	@Column
+	private String fechaPago;
 	
-	public Period edad() {
+	
+	public boolean mayorDeEdad() {
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate fechaNac = LocalDate.parse(this.fechaNac, fmt);
 		LocalDate ahora = LocalDate.now();
 		Period periodo = Period.between(fechaNac, ahora);
-		return periodo;
+		return periodo.getYears() >= 18;
 	}
 	public String getNombre() {
 		return nombre;
@@ -147,9 +130,7 @@ public class AlumnoDTO {
 	}
 
 	public void setNombreMayor(String nombreMayor) {
-		if(this.edad().getYears() < 18) {
 			this.nombreMayor = nombreMayor;
-		}
 	}
 
 	public String getApellidoMayor() {
@@ -157,9 +138,7 @@ public class AlumnoDTO {
 	}
 
 	public void setApellidoMayor(String apellidoMayor) {
-		if(this.edad().getYears() < 18) {
 		this.apellidoMayor = apellidoMayor;
-		}
 	}
 
 	public int getDniMayor() {
@@ -167,9 +146,7 @@ public class AlumnoDTO {
 	}
 
 	public void setDniMayor(int dniMayor) {
-		if(this.edad().getYears() < 18) {
 		this.dniMayor = dniMayor;
-		}
 	}
 
 	public String getMailMayor() {
@@ -177,9 +154,7 @@ public class AlumnoDTO {
 	}
 
 	public void setMailMayor(String mailMayor) {
-		if(this.edad().getYears() < 18) {
 		this.mailMayor = mailMayor;
-		}
 	}
 
 	public int getTelefonoMayor() {
@@ -187,18 +162,21 @@ public class AlumnoDTO {
 	}
 
 	public void setTelefonoMayor(int telefonoMayor) {
-		if(this.edad().getYears() < 18) {
 		this.telefonoMayor = telefonoMayor;
-		}
 	}
-
-	public String getNivel() {
-		return nivel;
+	public String getCurso() {
+		return curso;
 	}
-
-	public void setNivel(String nivel) {
-		this.nivel = nivel;
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
+	public String getFechaPago() {
+		return fechaPago;
+	}
+	public void setFechaPago(String fechaPago) {
+		this.fechaPago = fechaPago;
+	}
+	
 	
 	
 	

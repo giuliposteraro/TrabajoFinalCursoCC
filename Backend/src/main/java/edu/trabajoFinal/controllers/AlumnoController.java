@@ -68,6 +68,8 @@ public class AlumnoController {
 			amodificar.setDniMayor(alumno.getDniMayor());
 			amodificar.setMailMayor(alumno.getMailMayor());
 			amodificar.setTelefonoMayor(alumno.getTelefonoMayor());
+			amodificar.setCurso(alumno.getCurso());
+			amodificar.setFechaPago(alumno.getFechaPago());
 			this.repoAlumnos.save(amodificar);
 			this.respuesta.setMensaje("Modifico correctamente");
 			this.respuesta.setStatusCode(200);

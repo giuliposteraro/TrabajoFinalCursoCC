@@ -17,6 +17,18 @@ public class CursoDTO {
 	
 	@Column
 	private String nivel;
+	
+	@Column
+	private String dias; 
+	
+	@Column
+	private String categoria;
+	
+	@Column
+	private String edades; 
+	
+	@Column
+	private int valor; 
 
 	public int getId() {
 		return id;
@@ -33,6 +45,39 @@ public class CursoDTO {
 	public void setNivel(String nivel) {
 		this.nivel = nivel;
 	}
+
+	public String getDias() {
+		return dias;
+	}
+
+	public void setDias(String dias) {
+		this.dias = dias;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public String getEdades() {
+		return edades;
+	}
+
+	public void setEdades(String edades) {
+		this.edades = edades;
+	}
+
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
+	}
+	
 	
 	
 	
