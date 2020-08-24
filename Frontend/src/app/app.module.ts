@@ -9,11 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroComponent } from './components/hero/hero.component';
-import { AlumnoComponent } from './components/alumno/alumno.component';
-import { AlumnoFormComponent } from './components/alumno-form/alumno-form.component';
+import { AlumnoComponent } from './components/alumno-components/alumno/alumno.component';
+import { AlumnoFormComponent } from './components/alumno-components/alumno-form/alumno-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlumnoService } from './services/alumno.service';
 import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.component';
+import { CursoComponent } from './components/cursos-component/curso/curso.component';
+import { CursoService } from './services/curso.service';
+import { CursoFormComponent } from './curso-form/curso-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.
     HeroComponent,
     AlumnoComponent,
     AlumnoFormComponent,
-    ListaAlumnosComponent
+    ListaAlumnosComponent,
+    CursoComponent,
+    CursoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [AlumnoService],
+  providers: [AlumnoService, CursoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

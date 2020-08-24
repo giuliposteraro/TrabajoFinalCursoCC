@@ -1,0 +1,18 @@
+<div>
+  <label>Nombre curso:
+    <input #CursoName />
+  </label>
+  <button (click)="add(CursoName.value); CursoName.value=''">
+    agregar
+  </button>
+</div>
+
+<ul class="cursos">
+  <li *ngFor="let curso of cursos">
+    <a routerLink="/detail/{{curso.id}}">
+      <span class="badge">{{curso.id}}</span> {{curso.nombre}}
+    </a>
+    <button class="borrar" title="delete curso"
+      (click)="borrar(curso)">x</button>
+  </li>
+</ul>

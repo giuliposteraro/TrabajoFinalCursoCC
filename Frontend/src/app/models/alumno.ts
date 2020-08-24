@@ -12,7 +12,8 @@ export class Alumno {
     public dniMayor: number;
     public mailMayor: string;
     public telefonoMayor: number;
-    public nivel: string;
+    public curso: string;
+    public fechaPago: string;
 
     constructor(){}
 
