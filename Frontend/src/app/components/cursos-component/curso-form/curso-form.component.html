@@ -1,16 +1,6 @@
 <div class="card my-5">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #cursoForm="ngForm">
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" [(ngModel)]="curso.nombre" 
-          class="form-control" 
-          id="nombre" 
-          name="nombre" 
-          placeholder="Escriba el nombre del curso"
-          required #name="ngModel">
-          <div class="invalid-feedback">Nombre invalido</div>
-    </div>
     <div class="form-group">
         <label for="nivel">Nivel</label>
         <input type="text" [(ngModel)]="curso.nivel" 
@@ -67,6 +57,8 @@
           Recordar
         </label>
     </div>
-      <button type="cargar" [disabled]="!alumnoForm.form.valid" class="btn btn-info">Cargar</button>
+      <button type="cargar" [disabled]="!cursoForm.form.valid" class="btn btn-info">Cargar</button>
+      &nbsp;
+      <button type="cancelar" [disabled]="!cursoForm.form.valid" class="btn btn-success"  [routerLink]="['/cursos']">Cancelar</button>
   </form>
 </div>

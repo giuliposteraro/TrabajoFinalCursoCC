@@ -7,17 +7,14 @@
 
   <div class="collapse navbar-collapse" id="mainNavbar">
     <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']" [ngClass]="{active: route=='/home'}">Home</a>
+      </li>
      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/alumnos']" [ngClass]="{active: route=='/alumnos'}">Alumnos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/alumnos/nuevo']" [ngClass]="{active: route=='/alumnos/nuevo'}">Nuevo Alumno</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/cursos']">Cursos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/cursos/nuevo']">Nuevo curso</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/asistencia']">Asistencia</a>

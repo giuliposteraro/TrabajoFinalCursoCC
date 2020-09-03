@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.trabajoFinal.dao.AlumnoDTO;
 import edu.trabajoFinal.repository.AlumnoDTORepository;
-import edu.trabajoFinal.response.Response;
+import edu.trabajoFinal.responses.AlumnoResponse;
+import edu.trabajoFinal.responses.Response;
 
 @CrossOrigin
 @RestController
@@ -23,7 +24,6 @@ public class AlumnoController {
 	
 	@Autowired
 	private AlumnoDTORepository repoAlumnos;
-
 	
 	@Autowired
 	private Response respuesta;
@@ -34,8 +34,17 @@ public class AlumnoController {
 	}
 	
 	@GetMapping(value= "alumnos/{id}")
-	public AlumnoDTO obtenerAlumnoPorId(@PathVariable int id) {
-		return this.repoAlumnos.findById(id).get();
+	public ResponseEntity<AlumnoResponse> obtenerAlumnoPorId(@PathVariable int id) {
+		AlumnoResponse ar = null;
+		try {
+			ar = new AlumnoResponse(repoAlumnos.findById(id).get());
+			ar.setMensaje("Alumno encontrado");
+			ar.setStatusCode(200);
+			return ResponseEntity.ok(ar);
+			
+		} catch (Exception e) {
+			return (ResponseEntity<AlumnoResponse>) ResponseEntity.ok(ar).status(500);
+		}
 	}
 	
 	@PostMapping(value="alumnos")

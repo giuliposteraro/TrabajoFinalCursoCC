@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Curso } from 'src/app/models/curso';
 import { CursoService } from '../../../services/curso.service'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-curso',
@@ -10,6 +11,7 @@ import { CursoService } from '../../../services/curso.service'
 export class CursoComponent implements OnInit {
 
   public cursos: Curso[];
+  private location: Location;
 
   constructor(private cursoService: CursoService) { }
 
@@ -19,12 +21,10 @@ export class CursoComponent implements OnInit {
     });
   }
 
-  add(nombre: string): void {
-    nombre = nombre.trim();
-    if (!name) { return; }
-    this.cursoService.addCurso({ nombre } as Curso)
-      .subscribe(hero => {
-        this.cursos.push(hero);
+  add(curso: Curso): void {
+    this.cursoService.addCurso(curso)
+      .subscribe(curso => {
+        this.cursos.push(curso);
       });
   }
 
@@ -35,6 +35,10 @@ export class CursoComponent implements OnInit {
 
   save(curso: Curso): void {
     this.cursoService.modifyCurso(curso)
-      .subscribe();
+      .subscribe(() => this.goBack());
+  }
+
+  goBack(){
+    this.location.back();
   }
 }

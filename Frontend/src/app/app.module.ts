@@ -16,7 +16,7 @@ import { AlumnoService } from './services/alumno.service';
 import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.component';
 import { CursoComponent } from './components/cursos-component/curso/curso.component';
 import { CursoService } from './services/curso.service';
-import { CursoFormComponent } from './curso-form/curso-form.component';
+import { CursoFormComponent } from './components/cursos-component/curso-form/curso-form.component';
 
 @NgModule({
   declarations: [

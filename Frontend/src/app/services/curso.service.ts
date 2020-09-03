@@ -54,7 +54,8 @@ export class CursoService {
    }
 
    public modifyCurso(curso:Curso): Observable<Curso>{
-     return this.http.put<Curso>(this.url,curso, httpOptions)
+    const urlPut = '${this.url}/${curso.id}'
+     return this.http.put<Curso>(urlPut,curso, httpOptions)
      .pipe(
       catchError(this.handleError)
     );

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.trabajoFinal.dao.CursoDTO;
 import edu.trabajoFinal.repository.CursoDTORepository;
-import edu.trabajoFinal.response.Response;
+import edu.trabajoFinal.responses.Response;
 
 @CrossOrigin
 @RestController

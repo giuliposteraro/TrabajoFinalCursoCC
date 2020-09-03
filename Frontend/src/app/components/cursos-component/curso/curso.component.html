@@ -1,18 +1,33 @@
-<div>
-  <label>Nombre curso:
-    <input #CursoName />
-  </label>
-  <button (click)="add(CursoName.value); CursoName.value=''">
-    agregar
-  </button>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">Id curso</th>
+          <th scope="col">Nivel</th>
+          <th scope="col">Dias</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Edades</th>
+          <th scope="col">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let curso of cursos">
+          <td>{{ curso.id }}</td>
+          <td>{{ curso.nivel }}</td>
+          <td>{{ curso.dias }}</td>
+          <td>{{ curso.categoria }}</td>
+          <td>{{ curso.edades }}</td>
+          <td>{{ curso.valor }}</td>
+          <button type="button" class="btn btn-dark" (click) = "save(curso)" >Modificar</button>
+          &nbsp;
+          <button type="button" class="btn btn-danger" (click) = "delete(curso.id)" >Eliminar</button>
+        </tr>
+      </tbody>
+    </table>
+    <footer>
+      <button type="button" class="btn btn-info" [routerLink]="['/cursos/nuevo']">Nuevo Curso</button>
+    </footer>
+  </div>
 </div>
-
-<ul class="cursos">
-  <li *ngFor="let curso of cursos">
-    <a routerLink="/detail/{{curso.id}}">
-      <span class="badge">{{curso.id}}</span> {{curso.nombre}}
-    </a>
-    <button class="borrar" title="delete curso"
-      (click)="borrar(curso)">x</button>
-  </li>
-</ul>
+<div>

@@ -1,4 +1,4 @@
-package edu.trabajoFinal.response;
+package edu.trabajoFinal.responses;
 
 import org.springframework.stereotype.Component;
 

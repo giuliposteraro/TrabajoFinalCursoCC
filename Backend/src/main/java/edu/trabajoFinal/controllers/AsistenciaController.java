@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.trabajoFinal.dao.AsistenciaDTO;
 import edu.trabajoFinal.repository.AsistenciaDTORepository;
-import edu.trabajoFinal.response.Response;
+import edu.trabajoFinal.responses.Response;
 
 @CrossOrigin
 @RestController
