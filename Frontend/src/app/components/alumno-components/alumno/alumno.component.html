@@ -33,6 +33,9 @@
           <td>{{ alumno.mailMayor }}</td>
           <td>{{ alumno.telefonoMayor }}</td>
           <td>{{ alumno.nivel }}</td>
+          <button type="button" class="btn btn-dark" [routerLink]= "['/alumnos', alumno.numSocio]" >Modificar</button>
+          &nbsp;
+          <button type="button" class="btn btn-danger" (click) = "delete(curso.id)" >Eliminar</button>
         </tr>
       </tbody>
     </table>

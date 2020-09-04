@@ -13,10 +13,10 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'alumnos', component: AlumnoComponent},
   {path: 'alumnos/nuevo', component: AlumnoFormComponent},
-  {path: 'alumnos/modificar/:id', component: AlumnoFormComponent},
+  {path: 'alumnos/:id', component: AlumnoFormComponent},
   {path: 'cursos', component: CursoComponent},
   {path: 'cursos/nuevo', component: CursoFormComponent},
-  {path: 'cursos/modificar/:idCurso', component: CursoFormComponent},
+  {path: 'cursos/:id', component: CursoFormComponent},
   {path: '**', redirectTo: '/'}
 ];
 

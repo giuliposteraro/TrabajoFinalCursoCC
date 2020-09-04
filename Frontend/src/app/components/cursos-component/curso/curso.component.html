@@ -19,7 +19,7 @@
           <td>{{ curso.categoria }}</td>
           <td>{{ curso.edades }}</td>
           <td>{{ curso.valor }}</td>
-          <button type="button" class="btn btn-dark" (click) = "save(curso)" >Modificar</button>
+          <button type="button" class="btn btn-dark" [routerLink]= "['/cursos', curso.id]"  >Modificar</button>
           &nbsp;
           <button type="button" class="btn btn-danger" (click) = "delete(curso.id)" >Eliminar</button>
         </tr>
