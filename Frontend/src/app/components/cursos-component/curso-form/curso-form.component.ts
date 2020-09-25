@@ -1,41 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Curso } from 'src/app/models/curso';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CursoService } from 'src/app/services/curso.service';
-import { FormGroup } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-curso-form',
   templateUrl: './curso-form.component.html',
   styleUrls: ['./curso-form.component.scss']
 })
-export class CursoFormComponent {
+export class CursoFormComponent implements OnInit{
 
-  public curso: Curso;
-  public modify: boolean = false;
+  curso: Curso = new Curso();
+  submitted = false; 
 
-  constructor(private route: ActivatedRoute, 
-              private router: Router,
+  constructor(private router: Router,
               private cursoService: CursoService) {
-                this.curso = new Curso();
-              }
+               }
+  
 
-  onSubmit(){
-    //this.cursoService.addCurso(this.curso).subscribe(result => this.gotoCursoList());
-    if(this.modify){
-      this.cursoService.modifyCurso(this.curso).subscribe(result => this.goToCurso());
-    }else{
-      this.cursoService.addCurso(this.curso).subscribe(result => this.gotoCursoList());
-    }
+  ngOnInit() {}
+
+  newCurso(): void {
+    this.submitted = false;
+    this.curso = new Curso();
   }
 
-  gotoCursoList() {
+  save() {
+    this.cursoService
+    .addCurso(this.curso).subscribe(data => {
+      console.log(data)
+      this.curso = new Curso();
+      this.gotoList();
+    }, 
+    error => console.log(error));
+  }
+
+  gotoList() {
     this.router.navigate(['/cursos']);
   }
 
-  goToCurso(){
-    this.router.navigate(['/cursos/${curso.id}']);
+  onSubmit() {
+    this.submitted = true;
+    this.save();       
   }
-   
+
 }

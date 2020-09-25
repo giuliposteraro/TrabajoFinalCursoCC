@@ -1,120 +1,101 @@
-<div class="card my-5">
+<div  [hidden]="submitted" class="card my-5">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #alumnoForm="ngForm">
       <div class="form-group">
+        <h2>Nuevo alumno</h2>
         <label for="nombre">Nombre</label>
         <input type="text" [(ngModel)]="alumno.nombre" 
           class="form-control" 
-          id="nombre" 
-          name="nombre" 
           placeholder="Escriba su nombre"
-          required #name="ngModel">
+          required name="nombre" #name>
           <div class="invalid-feedback">Nombre invalido</div>
       </div>
         <div class="form-group">
         <label for="apellido">Apellido</label>
         <input type="text" [(ngModel)]="alumno.apellido" 
-          class="form-control" 
-          id="apellido" 
-          name="apellido" 
+          class="form-control"  
           placeholder="Escriba su apellido"
-          required #name="ngModel">
+          required name="apellido" #name>
           <div class="invalid-feedback">Apellido invalido</div>
       </div>
       <div class="form-group">
           <label for="fechaNac">Fecha de nacimiento</label>
           <input class="form-control" type="date" [(ngModel)]="alumno.fechaNac"
               value="2011-08-19" 
-              id="fechaNac" 
-              name="fechaNac" 
               placeholder="Escriba su fecha de nacimiento"
-              required #name="ngModel">
+              required name="fechaNac" #name>
             <div class="invalid-feedback">Fecha de nacimiento invalida</div>
       </div>
         <div class="form-group">
         <label for="mail">Email</label>
         <input type="text" [(ngModel)]="alumno.mail" 
           class="form-control" 
-          id="mail" 
-          name="mail" 
           placeholder="Escriba su email"
-          required #name="ngModel">
+          required name="mail" #name>
           <div class="invalid-feedback">Email invalido</div>
       </div>
       <div class="form-group">
         <label for="obraSoc">Obra social</label>
         <input type="text" [(ngModel)]="alumno.obraSoc" 
           class="form-control" 
-          id="obraSoc" 
-          name="obraSoc" 
           placeholder="Escriba su obra social"
-          required #name="ngModel">
+          required name="obraSoc" #name>
           <div class="invalid-feedback">Obra social invalida</div>
       </div>
       <div class="form-group">
         <label for="exampleFormControlFile1">Certificado médico</label>
         <input type="file" [(ngModel)]="alumno.certMedico"
         class="form-control-file"
-        id="certMedico">
+        required name="certMedico" #name>
       <div class="invalid-feedback">Archivo invalido</div>
     </div>
- <!--  <div class="form-group">
+    <div class="form-group">
       <label for="curso">Curso</label>
-      <select class="form-control" [(ngModel)]="alumno.curso" id="nivel" name="nivel" required #name="ngModel">
+      <select class="form-control" [(ngModel)]="alumno.curso" required name= "curso" #name>
         <option [value] = "curso.id" *ngFor= "let curso of cursos">
          {{curso.nivel}} - {{curso.categoria}} de {{curso.edades}} años los {{curso.dias}} / {{curso.curso}}
         </option>
       </select>
-    </div> -->
-  <div *ngIf="alumno.menorEdad" class="form-group">
+    </div> 
+  <div *ngIf="menorEdad" class="form-group">
      <div class="form-group">
         <label for="nombreMayor">Nombre del tutor</label>
         <input type="text" [(ngModel)]="alumno.nombreMayor" 
           class="form-control" 
-          id="nombreMayor" 
-          name="nombreMayor" 
           placeholder="Escriba el nombre de su tutor"
-          required #name="ngModel" required>
+           required name="nombreMayor" #name>
           <div class="invalid-feedback">Nombre invalido</div>
       </div>
      <div class="form-group">
         <label for="apellidoMayor">Apellido del tutor</label>
         <input type="text" [(ngModel)]="alumno.apellidoMayor" 
           class="form-control" 
-          id="apellidoMayor" 
-          name="apellidoMayor" 
           placeholder="Escriba el apellido de su tutor"
-          required #name="ngModel">
+          required name="apellidoMayor" #name>
           <div class="invalid-feedback">Apellido invalido</div>
       </div>
      <div class="form-group">
         <label for="dniMayor">DNI del tutor</label>
         <input type="text" [(ngModel)]="alumno.dniMayor" 
           class="form-control" 
-          id="dniMayor" 
-          name="dniMayor" 
           placeholder="Escriba el DNI de su tutor"
-          required #name="ngModel">
+          required name="dniMayor" #name>
           <div class="invalid-feedback">DNI invalido</div>
       </div>
      <div class="form-group">
         <label for="mailMayor">Mail del tutor</label>
         <input type="text" [(ngModel)]="alumno.mailMayor" 
           class="form-control" 
-          id="mailMayor" 
-          name="mailMayor" 
           placeholder="Escriba el mail de su tutor"
-          required #name="ngModel">
+          required name="mailMayor" #name>
           <div class="invalid-feedback">Mail invalido</div>
       </div>
      <div class="form-group">
         <label for="telefonoMayor">Telefono del tutor</label>
         <input type="text" [(ngModel)]="alumno.telefonoMayor" 
           class="form-control" 
-          id="telefonoMayor" 
-          name="telefonoMayor" 
           placeholder="Escriba el número de telefono de su tutor"
-          required #name="ngModel">
+           required name="telefonoMayor" #name>
           <div class="invalid-feedback">Telefono invalido</div>
       </div>
   </div>
@@ -124,9 +105,9 @@
           Recordar
         </label>
     </div>
-      <button type="cargar" [disabled]="!alumnoForm.form.valid" class="btn btn-info"  [routerLink]="['/alumnos']" >Cargar</button>
+      <button type="submit" class="btn btn-success"[disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Cargar</button>
       &nbsp;
-      <button type="cancelar" [disabled]="!alumnoForm.form.valid" class="btn btn-info" [routerLink]="['/alumnos']" >Cancelar</button>
+      <button type="button" class="btn btn-link" [disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Cancelar</button>
   </form>
   </div>
 </div>

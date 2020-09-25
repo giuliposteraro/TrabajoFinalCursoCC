@@ -13,11 +13,9 @@ const httpOptions = {
 @Injectable()
 export class AlumnoService {
 
-  private url: string;
+  private baseUrl = "http://localhost:8080/alumnos";
 
-  constructor(private http: HttpClient) {
-    this.url = "http://localhost:8080/alumnos";
-   }
+  constructor(private http: HttpClient) {}
 
    private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -31,38 +29,42 @@ export class AlumnoService {
       'Ocurrio un error. Por favor intente mas tarde');
   }
 
-  public getAlumnoById(id: number): Observable<Alumno> {
+  public getAlumnoById(id: number): Observable<any> {
     const urlGet = '${this.url}/${id}';
-    return this.http.get<Alumno>(urlGet)
+    return this.http.get(`${this.baseUrl}/${id}`)
     .pipe(
       catchError(this.handleError)
     );
   } 
 
-   public deleteAlumno(id:number):Observable<{}>{
+   public deleteAlumno(id:number):Observable<any>{
     const urlDelete = '${this.url}/${id}'
-    return this.http.delete(urlDelete, httpOptions)
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' })
     .pipe(
       catchError(this.handleError)
     );
 
    }
-   public getAlumnos(): Observable<Alumno[]> {
-    return this.http.get<Alumno[]>(this.url);
+   public getAlumnos(): Observable<any> {
+    return this.http.get(`${this.baseUrl}`);
   }
  
-  public addAlumno(alumno: Alumno) {
-    return this.http.post<Alumno>(this.url, alumno, httpOptions)
+  public addAlumno(alumno: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`,alumno, httpOptions)
     .pipe(
       catchError(this.handleError)
       );
   }
 
-  public modifyAlumno(alumno: Alumno): Observable<Alumno> {
-    const urlPut = '${this.url}/${alumno.numSocio}'
-    return this.http.put<Alumno>(this.url, alumno, httpOptions)
+  public modifyAlumno(id: number, value: any): Observable<Object> {
+    return this.http.put<Alumno>(`${this.baseUrl}/${id}`, value, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  getAlumnosByIdCurso(id: number): Observable<Alumno>{
+    const urlGet = '${this.url}/curso/${id}'
+    return this.http.get<Alumno>(urlGet).pipe(catchError(this.handleError));
   }
 }

@@ -1,4 +1,4 @@
-<div class="card my-5">
+ <div class="card my-5">
   <div class="card-body">
     <table class="table table-bordered table-striped">
       <thead class="table-primary">
@@ -12,16 +12,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let curso of cursos">
+        <tr *ngFor="let curso of cursos | async">
           <td>{{ curso.id }}</td>
           <td>{{ curso.nivel }}</td>
           <td>{{ curso.dias }}</td>
           <td>{{ curso.categoria }}</td>
           <td>{{ curso.edades }}</td>
           <td>{{ curso.valor }}</td>
-          <button type="button" class="btn btn-dark" [routerLink]= "['/cursos', curso.id]"  >Modificar</button>
+          <button type="button" class="btn btn-dark" (click)="updateCurso(curso.id)">Modificar</button> <!--[routerLink]= "['/cursos', curso.id]"-->
           &nbsp;
-          <button type="button" class="btn btn-danger" (click) = "delete(curso.id)" >Eliminar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteCurso(curso.id)">Eliminar</button>
         </tr>
       </tbody>
     </table>
@@ -30,4 +30,4 @@
     </footer>
   </div>
 </div>
-<div>
+<div> 

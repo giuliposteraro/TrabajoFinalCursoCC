@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +21,10 @@ import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.
 import { CursoComponent } from './components/cursos-component/curso/curso.component';
 import { CursoService } from './services/curso.service';
 import { CursoFormComponent } from './components/cursos-component/curso-form/curso-form.component';
-import { EditarComponent } from './components/cursos-component/editar-curso/editar.component';
+import { AsistenciaComponent } from './components/asistencia/asistencia.component';
+import { AsistenciaService } from './services/asistencia.service';
+import { EditarCursoComponent } from './components/cursos-component/editar-curso/editar-curso.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +36,8 @@ import { EditarComponent } from './components/cursos-component/editar-curso/edit
     ListaAlumnosComponent,
     CursoComponent,
     CursoFormComponent,
-    EditarComponent
+    AsistenciaComponent,
+    EditarCursoComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +45,14 @@ import { EditarComponent } from './components/cursos-component/editar-curso/edit
     HttpClientModule,
     NgbModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatListModule
   ],
-  providers: [AlumnoService, CursoService],
+  providers: [AlumnoService, AsistenciaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

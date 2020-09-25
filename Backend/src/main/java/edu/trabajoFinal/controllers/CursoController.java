@@ -17,7 +17,7 @@ import edu.trabajoFinal.dao.CursoDTO;
 import edu.trabajoFinal.repository.CursoDTORepository;
 import edu.trabajoFinal.responses.Response;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class CursoController {
 	
@@ -28,17 +28,17 @@ public class CursoController {
 	@Autowired
 	private Response respuesta;
 	
-	@GetMapping(value= "cursos")
+	@GetMapping(value= "/cursos")
 	public List<CursoDTO> obtenerCursos(){
 		return this.repoCursos.findAll();
 	}
 	
-	@GetMapping(value= "cursos/{id}")
+	@GetMapping(value= "/cursos/{id}")
 	public CursoDTO obtenerCursoPorId(@PathVariable int id) {
 		return this.repoCursos.findById(id).get();
 	}
 	
-	@PostMapping(value="cursos")
+	@PostMapping(value="/cursos")
 	public ResponseEntity<Response> altaCurso(@RequestBody CursoDTO curso){
 		try {
 			repoCursos.save(curso);
@@ -53,15 +53,15 @@ public class CursoController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@PutMapping(value= "cursos/{id}")
+	@PutMapping(value= "/cursos/{id}")
 	public ResponseEntity<Response> modificarCurso(@RequestBody CursoDTO curso){
 		try {
 			CursoDTO cmodificar = this.repoCursos.findById(curso.getId()).get();
 			cmodificar.setNivel(curso.getNivel());
 			cmodificar.setCategoria(curso.getCategoria());
 			cmodificar.setDias(curso.getDias());
-			cmodificar.setValor(curso.getValor());
 			cmodificar.setEdades(curso.getEdades());
+			cmodificar.setValor(curso.getValor());
 			this.repoCursos.save(cmodificar);
 			this.respuesta.setMensaje("Modifico correctamente");
 			this.respuesta.setStatusCode(200);
@@ -74,10 +74,10 @@ public class CursoController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@DeleteMapping(value= "cursos/{id}")
-	public ResponseEntity<Response> eliminarCurso(@RequestBody CursoDTO curso){
+	@DeleteMapping(value= "/cursos/{id}")
+	public ResponseEntity<Response> eliminarCurso(@PathVariable int id){
 		try {
-			repoCursos.deleteById(curso.getId());
+			repoCursos.deleteById(id);
 			this.respuesta.setMensaje("Curso eliminado correctamente");
 			this.respuesta.setStatusCode(200);
 		}

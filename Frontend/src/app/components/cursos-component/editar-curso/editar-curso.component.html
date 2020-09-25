@@ -1,8 +1,8 @@
-<div  [hidden]="submitted" class="card my-5">
+<div class="card my-5">
   <div class="card-body">
     <form #cursoForm="ngForm" (ngSubmit)= "onSubmit()"> <!-- #cursoForm="ngForm"  save(cursoForm.value)"-->
     <div class="form-group">
-      <h2>Nuevo curso</h2> <!--{{curso.id ? 'Editar' : 'Agregar'}} Curso-->
+      <h2>Editar curso</h2> <!--{{curso.id ? 'Editar' : 'Agregar'}} Curso-->
         <label for="nivel">Nivel</label>
         <input type="text" class="form-control" [(ngModel)]="curso.nivel" required name="nivel" #name>
           <div class="invalid-feedback">Nivel invalido</div>
@@ -27,13 +27,9 @@
         <input type="number" min="0" class="form-control" placeholder = "Escriba el valor" [(ngModel)]="curso.valor" required name="valor" #name>
           <div class="invalid-feedback">Valor invalido</div>
     </div>
-      <button type="submit" class="btn btn-success">Cargar</button>
+      <button type="submit" class="btn btn-success" >Guardar</button>
      <!-- <button type="submit" class="btn btn-info" [disabled]="!cursoForm.form.valid"> {{curso.id ? 'Guardar' : 'Agregar'}} </button> --> <!--cursoForm.value-->
       &nbsp;
-      <button type="button" class="btn btn-link"  [routerLink]="['/cursos']">Cancelar</button>
+      <button type="button" class="btn btn-link" [routerLink]="['/cursos']">Cancelar</button>
   </form>
-</div>
-
-<div [hidden]="!submitted">
-  <h4>You submitted successfully!</h4>
 </div>

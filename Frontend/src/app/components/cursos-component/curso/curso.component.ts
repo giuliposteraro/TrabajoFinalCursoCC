@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Curso } from 'src/app/models/curso';
 import { CursoService } from '../../../services/curso.service'
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl} from '@angular/forms';
+import { Identifiers } from '@angular/compiler/src/render3/r3_identifiers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-curso',
@@ -9,36 +12,52 @@ import { Location } from '@angular/common';
   styleUrls: ['./curso.component.scss']
 })
 export class CursoComponent implements OnInit {
+  
+  cursos: Observable<Curso[]>;
+  isupdated: boolean = false;   
+  curso : Curso=new Curso();  
 
-  public cursos: Curso[];
-  private location: Location;
+  constructor(private cursoService: CursoService,
+              private router: Router) { }
 
-  constructor(private cursoService: CursoService) { }
-
-  ngOnInit(): void {
-    this.cursoService.getCursos().subscribe(data => {
-      this.cursos = data;
-    });
+  ngOnInit(): void {  
+    this.reloadData();
   }
 
-  add(curso: Curso): void {
-    this.cursoService.addCurso(curso)
-      .subscribe(curso => {
-        this.cursos.push(curso);
-      });
+  reloadData() {
+    this.cursos = this.cursoService.getCursos();
   }
 
-  delete(curso: Curso): void {
-    this.cursos = this.cursos.filter(c => c !== curso);
-    this.cursoService.deleteCurso(curso.id).subscribe();
+  deleteCurso(id: number) {
+    this.cursoService.delete(id)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.reloadData();
+        },
+        error => console.log(error));
   }
 
-  save(curso: Curso): void {
-    this.cursoService.modifyCurso(curso)
-      .subscribe(() => this.goBack());
+  remove(id: number) {
+    this.cursoService.delete(id).subscribe(result => {
+      this.gotoList();
+    }, error => console.error(error));
   }
 
-  goBack(){
-    this.location.back();
+  gotoList() {
+    this.router.navigate(['/cursos']);
+  }
+  updateCurso(id: number){
+    this.router.navigate(['cursos/', id]);
+  }
+
+  changeisUpdate(){  
+    this.isupdated=false;  
+  }    
+  goBack(): void{
+    this.router.navigate(['/cursos']);
+  }
+  editCurso(curso: Curso){
+    this.router.navigate(['/cursos', this.cursoService.getCursoById(curso.id)])
   }
 }

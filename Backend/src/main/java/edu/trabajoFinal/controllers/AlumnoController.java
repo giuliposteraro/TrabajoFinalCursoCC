@@ -18,7 +18,7 @@ import edu.trabajoFinal.repository.AlumnoDTORepository;
 import edu.trabajoFinal.responses.AlumnoResponse;
 import edu.trabajoFinal.responses.Response;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class AlumnoController {
 	
@@ -28,12 +28,12 @@ public class AlumnoController {
 	@Autowired
 	private Response respuesta;
 	
-	@GetMapping(value= "alumnos")
+	@GetMapping(value= "/alumnos")
 	public List<AlumnoDTO> obtenerAlumnos(){
 		return this.repoAlumnos.findAll();
 	}
 	
-	@GetMapping(value= "alumnos/{id}")
+	@GetMapping(value= "/alumnos/{id}")
 	public ResponseEntity<AlumnoResponse> obtenerAlumnoPorId(@PathVariable int id) {
 		AlumnoResponse ar = null;
 		try {
@@ -47,7 +47,7 @@ public class AlumnoController {
 		}
 	}
 	
-	@PostMapping(value="alumnos")
+	@PostMapping(value="/alumnos")
 	public ResponseEntity<Response> altaAlumno(@RequestBody AlumnoDTO alumno){
 		try {
 			repoAlumnos.save(alumno);
@@ -62,7 +62,7 @@ public class AlumnoController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@PutMapping(value= "alumnos/{id}")
+	@PutMapping(value= "/alumnos/{id}")
 	public ResponseEntity<Response> modificarAlumno(@RequestBody AlumnoDTO alumno){
 		try {
 			AlumnoDTO amodificar = this.repoAlumnos.findById(alumno.getNumSoc()).get();
@@ -91,7 +91,7 @@ public class AlumnoController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@DeleteMapping(value= "alumnos/{id}")
+	@DeleteMapping(value= "/alumnos/{id}")
 	public ResponseEntity<Response> eliminarAlumno(@RequestBody AlumnoDTO alumno){
 		try {
 			repoAlumnos.deleteById(alumno.getNumSoc());

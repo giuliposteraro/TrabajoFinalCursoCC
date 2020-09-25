@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlumnoService } from '../../../services/alumno.service';
 import { Alumno } from 'src/app/models/alumno';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alumno',
@@ -10,36 +12,44 @@ import { Location } from '@angular/common';
 })
 export class AlumnoComponent implements OnInit {
 
-  public alumnos: Alumno[];
-  private location: Location;
+  alumnos: Observable<Alumno[]>;
+  isupdated: boolean = false; 
+  alumno: Alumno = new Alumno();
 
-  constructor(private alumnoService: AlumnoService) { }
+  constructor(private alumnoService: AlumnoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.alumnoService.getAlumnos().subscribe(data => {
-      this.alumnos = data;
-    });
+    this.reloadData();
   }
 
-  add(alumno: Alumno): void {
-    this.alumnoService.addAlumno(alumno)
-      .subscribe(alumno => {
-        this.alumnos.push(alumno);
-      });
+  reloadData() {
+    this.alumnos = this.alumnoService.getAlumnos();
   }
 
-  delete(alumno: Alumno): void {
-    this.alumnos = this.alumnos.filter(a => a !== alumno);
-    this.alumnoService.deleteAlumno(alumno.numSocio).subscribe();
+  deleteAlumno(id: number): void {
+    this.alumnoService.deleteAlumno(id)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.reloadData();
+      },
+      error => console.log(error));
+  }
+  gotoList() {
+    this.router.navigate(['/alumnos']);
+  }
+  updateAlumno(id: number){
+    this.router.navigate(['alumnos/', id]);
   }
 
-  save(alumno: Alumno): void {
-    this.alumnoService.modifyAlumno(alumno)
-      .subscribe(() => this.goBack());
+  changeisUpdate(){  
+    this.isupdated=false;  
+  }    
+  goBack(): void{
+    this.router.navigate(['/cursos']);
   }
-
-  goBack(){
-    this.location.back();
+  editAlumno(alumno: Alumno){
+    this.router.navigate(['/cursos', this.alumnoService.getAlumnoById(alumno.numSocio)])
   }
 
 }
