@@ -1,3 +1,5 @@
+import { Curso } from './curso';
+
 export class Alumno {
     
     public numSocio: number;
@@ -12,10 +14,9 @@ export class Alumno {
     public dniMayor: number;
     public mailMayor: string;
     public telefonoMayor: number;
-    public curso: string;
+    public curso: Curso;
     public fechaPago: string;
 
-    constructor(){}
 
     menorEdad: boolean = true;
     datosAlumno: any = null;

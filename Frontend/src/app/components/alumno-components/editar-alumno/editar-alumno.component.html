@@ -2,7 +2,7 @@
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #alumnoForm="ngForm">
       <div class="form-group">
-        <h2>Nuevo alumno</h2>
+        <h2>Editar curso</h2>
         <label for="nombre">Nombre</label>
         <input type="text" [(ngModel)]="alumno.nombre" 
           class="form-control" 
@@ -117,7 +117,7 @@
           Recordar
         </label>
     </div>
-      <button type="submit" class="btn btn-success"[disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Cargar</button>
+      <button type="submit" class="btn btn-success"[disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Guardar</button>
       &nbsp;
       <button type="button" class="btn btn-link" [disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Cancelar</button>
   </form>

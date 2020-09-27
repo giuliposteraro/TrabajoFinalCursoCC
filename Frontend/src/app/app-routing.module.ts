@@ -8,6 +8,7 @@ import { CursoComponent } from './components/cursos-component/curso/curso.compon
 import { CursoFormComponent } from './components/cursos-component/curso-form/curso-form.component';
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
 import { EditarCursoComponent } from './components/cursos-component/editar-curso/editar-curso.component';
+import { EditarAlumnoComponent } from './components/alumno-components/editar-alumno/editar-alumno.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'alumnos', component: AlumnoComponent},
   {path: 'alumnos/nuevo', component: AlumnoFormComponent},
-  {path: 'alumnos/:id', component: AlumnoFormComponent},
+  {path: 'alumnos/:id', component: EditarAlumnoComponent},
   {path: 'cursos', component: CursoComponent},
   {path: 'cursos/nuevo', component: CursoFormComponent},
   {path: 'cursos/:id', component: EditarCursoComponent},

@@ -17,7 +17,7 @@ const httpOptions = {
 export class CursoService {
 
   formData: Curso;
-  private baseUrl = '/cursos';
+  private baseUrl = 'http://localhost:8080/cursos';
   invocation = new XMLHttpRequest();
 
   constructor(private http: HttpClient) { }

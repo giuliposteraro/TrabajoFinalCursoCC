@@ -14,14 +14,12 @@ export class AlumnoFormComponent implements OnInit{
   
 
   alumno:Alumno = new Alumno();
-
-  cursos:Curso[];
-
+  cursos:Curso[]= [];
   menorEdad: boolean = true;
-
   datosAlumno: any = null;
-
   submitted = false; 
+  edad: number;
+  curso:Curso = new Curso();
 
   constructor(private route: ActivatedRoute, 
               private router: Router,
@@ -30,7 +28,9 @@ export class AlumnoFormComponent implements OnInit{
 
                }
 
-  ngOnInit(){}
+  ngOnInit(){  
+    this.getCursos(); 
+  }
   onSubmit(){
     this.submitted = true;
     this.menorEdad = this.datosAlumno?
@@ -39,9 +39,10 @@ export class AlumnoFormComponent implements OnInit{
     let time = new Date(0);
     this.save();  
     // this.alumnoService.addAlumno(this.alumno).subscribe(result => this.gotoAlumnoList());
-    // this.cursoService.getCursos().subscribe(data=>{
-    //   this.cursos = data;
-    // });
+  }
+  edadAlumno(event: any){
+    this.edad = this.getEdad(event.target.value);
+    this.menorEdad =  this.edad < 18;
   }
 
   getEdad(fecha: string){
@@ -63,5 +64,10 @@ export class AlumnoFormComponent implements OnInit{
     this.router.navigate(['/alumnos']);
   }
 
+  getCursos(){
+    this.cursoService.getCursos().subscribe(data=>{
+      this.cursos = data;
+    });
+  }
 
 }

@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class AlumnoService {
 
-  private baseUrl = "http://localhost:8080/alumnos";
+  private baseUrl = 'http://localhost:8080/alumnos';
 
   constructor(private http: HttpClient) {}
 

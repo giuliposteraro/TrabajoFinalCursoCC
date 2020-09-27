@@ -19,11 +19,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlumnoService } from './services/alumno.service';
 import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.component';
 import { CursoComponent } from './components/cursos-component/curso/curso.component';
-import { CursoService } from './services/curso.service';
 import { CursoFormComponent } from './components/cursos-component/curso-form/curso-form.component';
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
 import { AsistenciaService } from './services/asistencia.service';
 import { EditarCursoComponent } from './components/cursos-component/editar-curso/editar-curso.component';
+import { EditarAlumnoComponent } from './components/alumno-components/editar-alumno/editar-alumno.component';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { EditarCursoComponent } from './components/cursos-component/editar-curso
     CursoComponent,
     CursoFormComponent,
     AsistenciaComponent,
-    EditarCursoComponent
+    EditarCursoComponent,
+    EditarAlumnoComponent
   ],
   imports: [
     BrowserModule,
