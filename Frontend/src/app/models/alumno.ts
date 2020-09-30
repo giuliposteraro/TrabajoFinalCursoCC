@@ -18,18 +18,5 @@ export class Alumno {
     public fechaPago: string;
 
 
-    menorEdad: boolean = true;
-    datosAlumno: any = null;
 
-    setAlumno(){
-        this.menorEdad = this.datosAlumno?
-        this.getEdad(this.datosAlumno.fechaNacimiento)<18 :
-        false;
-        }
-    
-      getEdad(fecha: string){
-          let today = new Date(); 
-          let date = new Date(fecha);
-          return today.getFullYear() - date.getFullYear(); 
-        }
 }

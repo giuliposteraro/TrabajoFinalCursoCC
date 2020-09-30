@@ -4,6 +4,7 @@ import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { Curso } from 'src/app/models/curso'; 
 import { CursoService } from 'src/app/services/curso.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-alumno-form',
@@ -15,16 +16,15 @@ export class AlumnoFormComponent implements OnInit{
 
   alumno:Alumno = new Alumno();
   cursos:Curso[]= [];
-  menorEdad: boolean = true;
   datosAlumno: any = null;
   submitted = false; 
   edad: number;
   curso:Curso = new Curso();
 
-  constructor(private route: ActivatedRoute, 
-              private router: Router,
+  constructor(private router: Router,
               private alumnoService: AlumnoService,
-              private cursoService: CursoService) {
+              private cursoService: CursoService,
+              private datePipe: DatePipe) {
 
                }
 
@@ -33,16 +33,8 @@ export class AlumnoFormComponent implements OnInit{
   }
   onSubmit(){
     this.submitted = true;
-    this.menorEdad = this.datosAlumno?
-      this.getEdad(this.datosAlumno.fechaNacimiento)<18 :
-      false;
-    let time = new Date(0);
     this.save();  
     // this.alumnoService.addAlumno(this.alumno).subscribe(result => this.gotoAlumnoList());
-  }
-  edadAlumno(event: any){
-    this.edad = this.getEdad(event.target.value);
-    this.menorEdad =  this.edad < 18;
   }
 
   getEdad(fecha: string){
@@ -51,6 +43,9 @@ export class AlumnoFormComponent implements OnInit{
     return today.getFullYear() - date.getFullYear(); 
   }
 
+  menorEdad():boolean{
+    return this.getEdad(this.alumno.fechaNac) < 18;
+  }
   save() {
     this.alumnoService
     .addAlumno(this.alumno).subscribe(data => {
@@ -68,6 +63,12 @@ export class AlumnoFormComponent implements OnInit{
     this.cursoService.getCursos().subscribe(data=>{
       this.cursos = data;
     });
+  }
+
+  actualizarFechaPago(){
+    let today = new Date();
+    let fechaTransf = this.datePipe.transform(today,"yyyy-MM-dd")
+    this.alumno.fechaPago = fechaTransf;
   }
 
 }

@@ -1,4 +1,4 @@
-<div  [hidden]="submitted" class="card my-5">
+<div  class="card my-5">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #alumnoForm="ngForm">
       <div class="form-group">
@@ -22,7 +22,6 @@
           <label for="fechaNac">Fecha de nacimiento</label>
           <input class="form-control" type="date" [(ngModel)]="alumno.fechaNac"
               value="2011-08-19" 
-              (input)="edadAlumno($event)"
               required name="fechaNac" #name>
             <div class="invalid-feedback">Fecha de nacimiento invalida</div>
       </div>
@@ -58,10 +57,11 @@
         </option>
       </select> 
     </div> 
-  <div *ngIf="menorEdad" class="form-group">
+  <div  class="form-group">
      <div class="form-group">
         <label for="nombreMayor">Nombre del tutor</label>
         <input type="text" [(ngModel)]="alumno.nombreMayor" 
+          [disabled]="!menorEdad()"
           class="form-control" 
           placeholder="Escriba el nombre de su tutor"
            required name="nombreMayor" #name>
@@ -70,6 +70,7 @@
      <div class="form-group">
         <label for="apellidoMayor">Apellido del tutor</label>
         <input type="text" [(ngModel)]="alumno.apellidoMayor" 
+          [disabled]="!menorEdad()"
           class="form-control" 
           placeholder="Escriba el apellido de su tutor"
           required name="apellidoMayor" #name>
@@ -78,6 +79,7 @@
      <div class="form-group">
         <label for="dniMayor">DNI del tutor</label>
         <input type="text" [(ngModel)]="alumno.dniMayor" 
+          [disabled]="!menorEdad()"
           class="form-control" 
           placeholder="Escriba el DNI de su tutor"
           required name="dniMayor" #name>
@@ -86,6 +88,7 @@
      <div class="form-group">
         <label for="mailMayor">Mail del tutor</label>
         <input type="text" [(ngModel)]="alumno.mailMayor" 
+          [disabled]="!menorEdad()"
           class="form-control" 
           placeholder="Escriba el mail de su tutor"
           required name="mailMayor" #name>
@@ -94,6 +97,7 @@
      <div class="form-group">
         <label for="telefonoMayor">Telefono del tutor</label>
         <input type="text" [(ngModel)]="alumno.telefonoMayor" 
+          [disabled]="!menorEdad()"
           class="form-control" 
           placeholder="Escriba el número de telefono de su tutor"
            required name="telefonoMayor" #name>
@@ -102,49 +106,20 @@
        <div class="form-group">
           <label for="fechaNac">Fecha de último pago</label>
           <input class="form-control" type="date" [(ngModel)]="alumno.fechaPago"
+              name= "fecha"
               id="fechaPago"
               value="2011-08-19" 
               required name="fechaPago" #name>
-            <div class="invalid-feedback">No actualizo fecha de pago</div>
+            <div class="invalid-feedback">No actualizo fecha de pago</div> 
+            <br>
+           <button type="button" class="btn btn-primary" [disabled]="alumno.fechaPago" (click)="actualizarFechaPago()">
+            Pagar cuota del mes 
+           </button>
       </div>
-       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPago">
-        Pagar cuota del mes 
-       </button>
   </div>
-     <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-        <label class="form-check-label" for="autoSizingCheck">
-          Recordar
-        </label>
-    </div>
-      <button type="submit" class="btn btn-success"[disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Cargar</button>
+      <button type="submit" class="btn btn-success"[disabled]="!alumnoForm.form.valid" >Cargar</button>
       &nbsp;
-      <button type="button" class="btn btn-link" [disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Cancelar</button>
+      <button type="button" class="btn btn-link" [routerLink]="['/alumnos']" >Cancelar</button>
   </form>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pago cuota del mes</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label for="Valor">Valor</label>
-        <input type="number" [(ngModel)]="alumno.telefonoMayor" 
-          class="form-control" 
-          placeholder="Escriba el número de telefono de su tutor"
-           required name="telefonoMayor" #name>
-          <div class="invalid-feedback">Telefono invalido</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" data-toggle="form-group" data-target="fechaPago">Guardar cambios</button>
-      </div>
-    </div>
   </div>
 </div>

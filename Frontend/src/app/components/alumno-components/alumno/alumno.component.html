@@ -10,12 +10,13 @@
           <th scope="col">Mail</th>
           <th scope="col">Obra social</th>
           <th scope="col">Certificado medico</th>
+          <th scope="col">Curso</th>
           <th scope="col">Nombre del tutor</th>
           <th scope="col">Apellido del tutor</th>
           <th scope="col">DNI del tutor</th>
           <th scope="col">Mail del tutor</th>
           <th scope="col">Telefono del tutor</th>
-          <th scope="col">Nivel</th>
+          <th scope="col">Fecha último pago</th>
         </tr>
       </thead>
       <tbody>
@@ -27,12 +28,13 @@
           <td>{{ alumno.mail }}</td>
           <td>{{ alumno.obraSoc }}</td>
           <td>{{ alumno.certMedico }}</td>
+          <td>{{ alumno.curso }}</td>
           <td>{{ alumno.nombreMayor }}</td>
           <td>{{ alumno.apellidoMayor }}</td>
           <td>{{ alumno.dniMayor }}</td>
           <td>{{ alumno.mailMayor }}</td>
           <td>{{ alumno.telefonoMayor }}</td>
-          <td>{{ alumno.nivel }}</td>
+          <td>{{ alumno.fechaPago }}</td>
           <button type="button" class="btn btn-dark" [routerLink]= "['/alumnos', alumno.numSocio]" >Modificar</button>
           &nbsp;
           <button type="button" class="btn btn-danger" (click) = "delete(curso.id)" >Eliminar</button>

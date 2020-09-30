@@ -2,10 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
+import {DatePipe} from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +14,6 @@ import { AlumnoComponent } from './components/alumno-components/alumno/alumno.co
 import { AlumnoFormComponent } from './components/alumno-components/alumno-form/alumno-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlumnoService } from './services/alumno.service';
-import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.component';
 import { CursoComponent } from './components/cursos-component/curso/curso.component';
 import { CursoFormComponent } from './components/cursos-component/curso-form/curso-form.component';
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
@@ -33,7 +29,6 @@ import { EditarAlumnoComponent } from './components/alumno-components/editar-alu
     NavbarComponent,
     AlumnoComponent,
     AlumnoFormComponent,
-    ListaAlumnosComponent,
     CursoComponent,
     CursoFormComponent,
     AsistenciaComponent,
@@ -47,13 +42,9 @@ import { EditarAlumnoComponent } from './components/alumno-components/editar-alu
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatListModule
+    ReactiveFormsModule
   ],
-  providers: [AlumnoService, AsistenciaService],
+  providers: [AlumnoService, AsistenciaService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

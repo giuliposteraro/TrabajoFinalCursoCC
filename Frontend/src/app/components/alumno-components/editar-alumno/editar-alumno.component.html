@@ -1,4 +1,4 @@
-<div  [hidden]="submitted" class="card my-5">
+<div class="card my-5">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #alumnoForm="ngForm">
       <div class="form-group">
@@ -22,7 +22,6 @@
           <label for="fechaNac">Fecha de nacimiento</label>
           <input class="form-control" type="date" [(ngModel)]="alumno.fechaNac"
               value="2011-08-19" 
-              (input)="edadAlumno($event)"
               required name="fechaNac" #name>
             <div class="invalid-feedback">Fecha de nacimiento invalida</div>
       </div>
@@ -58,7 +57,7 @@
         </option>
       </select> 
     </div> 
-  <div *ngIf="menorEdad" class="form-group">
+  <div class="form-group">
      <div class="form-group">
         <label for="nombreMayor">Nombre del tutor</label>
         <input type="text" [(ngModel)]="alumno.nombreMayor" 
