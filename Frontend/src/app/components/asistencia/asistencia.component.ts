@@ -33,16 +33,16 @@ export class AsistenciaComponent implements OnInit {
         this.router.navigate(['cursos']);
       }
     })
-  this.asistenciaService.getAsistenciaByCurso(this.curso.id).subscribe(data => {
-    // console.log("curso: ", data)
-    this.asistencia = data;
-    this.alumnoService.getAlumnosByIdCurso(this.curso.id).subscribe(data => {
-      this.alumnos.push(data);
-      this.cursoService.getCursoById(this.curso.id).subscribe(data =>{
-        this.curso = data;
-        });
-      })
-    })
+  // this.asistenciaService.getAsistenciaByCurso(this.curso.id).subscribe(data => {
+  //   // console.log("curso: ", data)
+  //   this.asistencia = data;
+  //   this.alumnoService.getAlumnosByIdCurso(this.curso.id).subscribe(data => {
+  //     this.alumnos.push(data);
+  //     this.cursoService.getCursoById(this.curso.id).subscribe(data =>{
+  //       this.curso = data;
+  //       });
+  //     })
+  //   })
   }
 
 }

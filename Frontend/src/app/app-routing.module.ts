@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'alumnos', component: AlumnoComponent},
   {path: 'alumnos/nuevo', component: AlumnoFormComponent},
-  {path: 'alumnos/:id', component: EditarAlumnoComponent},
+  {path: 'alumnos/:numSocio', component: EditarAlumnoComponent},
   {path: 'cursos', component: CursoComponent},
   {path: 'cursos/nuevo', component: CursoFormComponent},
   {path: 'cursos/:id', component: EditarCursoComponent},

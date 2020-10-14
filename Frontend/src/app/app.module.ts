@@ -2,7 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { FileUploadModule } from 'primeng/fileupload';
+import {MessageService} from 'primeng/api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +17,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AlumnoComponent } from './components/alumno-components/alumno/alumno.component';
 import { AlumnoFormComponent } from './components/alumno-components/alumno-form/alumno-form.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AlumnoService } from './services/alumno.service';
 import { CursoComponent } from './components/cursos-component/curso/curso.component';
 import { CursoFormComponent } from './components/cursos-component/curso-form/curso-form.component';
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
@@ -42,9 +45,11 @@ import { EditarAlumnoComponent } from './components/alumno-components/editar-alu
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmDialogModule,
+    FileUploadModule
   ],
-  providers: [AlumnoService, AsistenciaService, DatePipe],
+  providers: [AsistenciaService, DatePipe, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

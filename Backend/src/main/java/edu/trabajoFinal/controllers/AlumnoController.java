@@ -33,18 +33,9 @@ public class AlumnoController {
 		return this.repoAlumnos.findAll();
 	}
 	
-	@GetMapping(value= "/alumnos/{id}")
-	public ResponseEntity<AlumnoResponse> obtenerAlumnoPorId(@PathVariable int id) {
-		AlumnoResponse ar = null;
-		try {
-			ar = new AlumnoResponse(repoAlumnos.findById(id).get());
-			ar.setMensaje("Alumno encontrado");
-			ar.setStatusCode(200);
-			return ResponseEntity.ok(ar);
-			
-		} catch (Exception e) {
-			return (ResponseEntity<AlumnoResponse>) ResponseEntity.ok(ar).status(500);
-		}
+	@GetMapping(value= "/alumnos/{numSocio}")
+	public AlumnoDTO obtenerAlumnoPorId(@PathVariable int numSocio) {
+		return this.repoAlumnos.findById(numSocio).get();
 	}
 	
 	@PostMapping(value="/alumnos")
@@ -62,10 +53,10 @@ public class AlumnoController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@PutMapping(value= "/alumnos/{id}")
+	@PutMapping(value= "/alumnos/{numSocio}")
 	public ResponseEntity<Response> modificarAlumno(@RequestBody AlumnoDTO alumno){
 		try {
-			AlumnoDTO amodificar = this.repoAlumnos.findById(alumno.getNumSoc()).get();
+			AlumnoDTO amodificar = this.repoAlumnos.findById(alumno.getNumSocio()).get();
 			amodificar.setNombre(alumno.getNombre());
 			amodificar.setApellido(alumno.getApellido());
 			amodificar.setFechaNac(alumno.getFechaNac());
@@ -91,10 +82,10 @@ public class AlumnoController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@DeleteMapping(value= "/alumnos/{id}")
-	public ResponseEntity<Response> eliminarAlumno(@RequestBody AlumnoDTO alumno){
+	@DeleteMapping(value= "/alumnos/{numSocio}")
+	public ResponseEntity<Response> eliminarAlumno(@PathVariable int numSocio){
 		try {
-			repoAlumnos.deleteById(alumno.getNumSoc());
+			repoAlumnos.deleteById(numSocio);
 			this.respuesta.setMensaje("Alumno eliminado correctamente");
 			this.respuesta.setStatusCode(200);
 		}

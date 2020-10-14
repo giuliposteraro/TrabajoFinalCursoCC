@@ -6,5 +6,4 @@ export class Curso {
     public edades:string;
     public valor:number;
 
-    modify: boolean = false;
 }

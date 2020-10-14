@@ -9,22 +9,22 @@
     </div>
     <div class="form-group">
         <label for="dias">Dias de entrenamiento</label>
-        <input type="text" class="form-control"  placeholder="Escriba los dias de entrenamiento" [(ngModel)]="curso.dias" required name="dias" #name>
+        <input type="text" class="form-control" [(ngModel)]="curso.dias" required name="dias" #name>
           <div class="invalid-feedback">Rango invalido</div>
     </div>
     <div class="form-group">
         <label for="categoria">Categoria</label>
-        <input type="text" class="form-control" placeholder="Escriba la categoria" [(ngModel)]="curso.categoria" required name="categoria" #name>
+        <input type="text" class="form-control" [(ngModel)]="curso.categoria" required name="categoria" #name>
           <div class="invalid-feedback">Categoria invalida</div>
     </div>
     <div class="form-group">
         <label for="edades">Edades</label>
-        <input type="text" class="form-control" placeholder="Escriba el rango de edades" [(ngModel)]="curso.edades" required name="edades" #name>
+        <input type="text" class="form-control" [(ngModel)]="curso.edades" required name="edades" #name>
           <div class="invalid-feedback">Rango de edades invalido</div>
     </div>
     <div class="form-group">
         <label for="valor">Valor</label>
-        <input type="number" min="0" class="form-control" placeholder = "Escriba el valor" [(ngModel)]="curso.valor" required name="valor" #name>
+        <input type="number" min="0" class="form-control" [(ngModel)]="curso.valor" required name="valor" #name>
           <div class="invalid-feedback">Valor invalido</div>
     </div>
       <button type="submit" class="btn btn-success" >Guardar</button>

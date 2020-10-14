@@ -5,6 +5,8 @@ import { AlumnoService } from 'src/app/services/alumno.service';
 import { Curso } from 'src/app/models/curso'; 
 import { CursoService } from 'src/app/services/curso.service';
 import { DatePipe } from '@angular/common';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-alumno-form',
@@ -20,11 +22,14 @@ export class AlumnoFormComponent implements OnInit{
   submitted = false; 
   edad: number;
   curso:Curso = new Curso();
+  files: any[];
+  uploadedFiles: any[] = [];
 
   constructor(private router: Router,
               private alumnoService: AlumnoService,
               private cursoService: CursoService,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private messageService: MessageService) {
 
                }
 
@@ -67,8 +72,19 @@ export class AlumnoFormComponent implements OnInit{
 
   actualizarFechaPago(){
     let today = new Date();
-    let fechaTransf = this.datePipe.transform(today,"yyyy-MM-dd")
+    let fechaTransf = this.datePipe.transform(today,"dd-MM-yyyy")
     this.alumno.fechaPago = fechaTransf;
   }
 
+  onUpload(event) {
+    for(let file of event.files) {
+        this.uploadedFiles.push(file);
+    }
+    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+  }
+
+  onFileChange(event){
+    this.files = event.target.files;
+    console.log(event);
+  }
 }

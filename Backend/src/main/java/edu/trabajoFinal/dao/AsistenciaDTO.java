@@ -1,11 +1,6 @@
 package edu.trabajoFinal.dao;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Asistencias")
@@ -18,11 +13,14 @@ public class AsistenciaDTO {
 	@Column
 	private String numSocio;
 	
-	@Column
-	private String curso;
-	
+	@ManyToOne
+	private CursoDTO curso;
+
 	@Column
 	private boolean presente;
+
+	@Column
+	private String fecha;
 
 	public int getId() {
 		return id;
@@ -32,11 +30,11 @@ public class AsistenciaDTO {
 		this.id = id;
 	}
 
-	public String getCurso() {
+	public CursoDTO getCurso() {
 		return curso;
 	}
 
-	public void setCurso(String curso) {
+	public void setCurso(CursoDTO curso) {
 		this.curso = curso;
 	}
 
@@ -55,7 +53,9 @@ public class AsistenciaDTO {
 	public String getNumSocio() {
 		return numSocio;
 	}
-	
-	
+
+	public String getFecha() { return fecha; }
+
+	public void setFecha(String fecha) { this.fecha = fecha; }
 	
 }

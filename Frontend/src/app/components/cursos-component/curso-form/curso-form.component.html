@@ -27,7 +27,7 @@
         <input type="number" min="0" class="form-control" placeholder = "Escriba el valor" [(ngModel)]="curso.valor" required name="valor" #name>
           <div class="invalid-feedback">Valor invalido</div>
     </div>
-      <button type="submit" class="btn btn-success">Cargar</button>
+      <button type="submit" class="btn btn-success" [disabled]="!cursoForm.form.valid">Cargar</button>
      <!-- <button type="submit" class="btn btn-info" [disabled]="!cursoForm.form.valid"> {{curso.id ? 'Guardar' : 'Agregar'}} </button> --> <!--cursoForm.value-->
       &nbsp;
       <button type="button" class="btn btn-link"  [routerLink]="['/cursos']">Cancelar</button>

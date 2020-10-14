@@ -1,57 +1,44 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #alumnoForm="ngForm">
+    <form #alumnoForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <h2>Editar curso</h2>
+        <h2>Editar Alumno</h2>
         <label for="nombre">Nombre</label>
-        <input type="text" [(ngModel)]="alumno.nombre" 
-          class="form-control" 
-          placeholder="Escriba su nombre"
-          required name="nombre" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.nombre" required name="nombre" #name>
           <div class="invalid-feedback">Nombre invalido</div>
       </div>
         <div class="form-group">
         <label for="apellido">Apellido</label>
-        <input type="text" [(ngModel)]="alumno.apellido" 
-          class="form-control"  
-          placeholder="Escriba su apellido"
-          required name="apellido" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.apellido" required name="apellido" #name>
           <div class="invalid-feedback">Apellido invalido</div>
       </div>
       <div class="form-group">
           <label for="fechaNac">Fecha de nacimiento</label>
-          <input class="form-control" type="date" [(ngModel)]="alumno.fechaNac"
-              value="2011-08-19" 
-              required name="fechaNac" #name>
+          <input type="date" class="form-control" [(ngModel)]="alumno.fechaNac" value="2011-08-19" required name="fechaNac" #name>
             <div class="invalid-feedback">Fecha de nacimiento invalida</div>
       </div>
         <div class="form-group">
         <label for="mail">Email</label>
-        <input type="text" [(ngModel)]="alumno.mail" 
-          class="form-control" 
-          placeholder="Escriba su email"
-          required name="mail" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.mail" required name="mail" #name>
           <div class="invalid-feedback">Email invalido</div>
       </div>
       <div class="form-group">
         <label for="obraSoc">Obra social</label>
-        <input type="text" [(ngModel)]="alumno.obraSoc" 
-          class="form-control" 
-          placeholder="Escriba su obra social"
-          required name="obraSoc" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.obraSoc" required name="obraSoc" #name>
           <div class="invalid-feedback">Obra social invalida</div>
       </div>
-      <div class="form-group">
+     <div class="form-group">
         <label for="exampleFormControlFile1">Certificado médico</label>
-        <input type="file" [(ngModel)]="alumno.certMedico"
+        <input (change)="onFileChange($event)" type="file" 
         class="form-control-file"
         required name="certMedico" #name>
-      <div class="invalid-feedback">Archivo invalido</div>
-    </div>
+        <div class="invalid-feedback">Archivo invalido</div> <!--[(ngModel)]="alumno.certMedico"-->
+      </div> 
+  <!-- <div class="form-group">
+      <label for="curso">Curso</label> -->
     <div class="form-group">
       <label for="curso">Curso</label>
-      <select class="form-control" [(ngModel)]="alumno.curso" required name= "curso" #name>
-        <option [ngValue]="undefined" hidden>Seleccione un curso...</option>
+      <select class="form-control" (change)="onChange($event.target.value)">
         <option [ngValue]="curso" *ngFor="let curso of cursos">
          {{curso.nivel}} de {{curso.categoria}} de {{curso.edades}} años los dias {{curso.dias}} de valor $ {{curso.valor}}
         </option>
@@ -60,90 +47,46 @@
   <div class="form-group">
      <div class="form-group">
         <label for="nombreMayor">Nombre del tutor</label>
-        <input type="text" [(ngModel)]="alumno.nombreMayor" 
-          class="form-control" 
-          placeholder="Escriba el nombre de su tutor"
-           required name="nombreMayor" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.nombreMayor" [disabled]="!menorEdad()" required name="nombreMayor" #name>
           <div class="invalid-feedback">Nombre invalido</div>
       </div>
      <div class="form-group">
         <label for="apellidoMayor">Apellido del tutor</label>
-        <input type="text" [(ngModel)]="alumno.apellidoMayor" 
-          class="form-control" 
-          placeholder="Escriba el apellido de su tutor"
-          required name="apellidoMayor" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.apellidoMayor" [disabled]="!menorEdad()" required name="apellidoMayor" #name>
           <div class="invalid-feedback">Apellido invalido</div>
       </div>
      <div class="form-group">
         <label for="dniMayor">DNI del tutor</label>
-        <input type="text" [(ngModel)]="alumno.dniMayor" 
-          class="form-control" 
-          placeholder="Escriba el DNI de su tutor"
-          required name="dniMayor" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.dniMayor" [disabled]="!menorEdad()" required name="dniMayor" #name>
           <div class="invalid-feedback">DNI invalido</div>
       </div>
      <div class="form-group">
         <label for="mailMayor">Mail del tutor</label>
-        <input type="text" [(ngModel)]="alumno.mailMayor" 
-          class="form-control" 
-          placeholder="Escriba el mail de su tutor"
-          required name="mailMayor" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.mailMayor" [disabled]="!menorEdad()" required name="mailMayor" #name>
           <div class="invalid-feedback">Mail invalido</div>
       </div>
      <div class="form-group">
         <label for="telefonoMayor">Telefono del tutor</label>
-        <input type="text" [(ngModel)]="alumno.telefonoMayor" 
-          class="form-control" 
-          placeholder="Escriba el número de telefono de su tutor"
-           required name="telefonoMayor" #name>
+        <input type="text" class="form-control" [(ngModel)]="alumno.telefonoMayor" [disabled]="!menorEdad()" required name="telefonoMayor" #name>
           <div class="invalid-feedback">Telefono invalido</div>
       </div>
        <div class="form-group">
           <label for="fechaNac">Fecha de último pago</label>
           <input class="form-control" type="date" [(ngModel)]="alumno.fechaPago"
               id="fechaPago"
-              value="2011-08-19" 
+              value="19-08-2011" 
               required name="fechaPago" #name>
             <div class="invalid-feedback">No actualizo fecha de pago</div>
+            <br>
+          <button type="button" class="btn btn-primary" (click)="actualizarFechaPago()" [disabled]="fechaDeHoy()">
+          Pagar cuota del mes 
+          </button>
       </div>
-       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPago">
-        Pagar cuota del mes 
-       </button>
-  </div>
-     <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-        <label class="form-check-label" for="autoSizingCheck">
-          Recordar
-        </label>
-    </div>
-      <button type="submit" class="btn btn-success"[disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Guardar</button>
+  <!-- </div> --> 
+      <button type="submit" class="btn btn-success">Guardar</button>
       &nbsp;
-      <button type="button" class="btn btn-link" [disabled]="!alumnoForm.form.valid" [routerLink]="['/alumnos']" >Cancelar</button>
-  </form>
-  </div>
+      <button type="button" class="btn btn-link" [routerLink]="['/alumnos']" >Cancelar</button>
+  <!--</form>-->
+  <!--</div> -->
 </div>
-<!-- Modal -->
-<div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pago cuota del mes</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label for="Valor">Valor</label>
-        <input type="number" [(ngModel)]="alumno.telefonoMayor" 
-          class="form-control" 
-          placeholder="Escriba el número de telefono de su tutor"
-           required name="telefonoMayor" #name>
-          <div class="invalid-feedback">Telefono invalido</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" data-toggle="form-group" data-target="fechaPago">Guardar cambios</button>
-      </div>
-    </div>
-  </div>
-</div>
+

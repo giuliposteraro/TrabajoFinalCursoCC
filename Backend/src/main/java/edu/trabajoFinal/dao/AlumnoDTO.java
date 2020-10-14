@@ -1,6 +1,7 @@
 package edu.trabajoFinal.dao;
 
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -10,8 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.swing.ImageIcon;
+
 
 
 @Entity
@@ -20,7 +22,8 @@ public class AlumnoDTO {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int numSoc;
+	@Column(name = "numSocio")
+	private int numSocio;
 	
 	@Column
 	private String nombre;
@@ -38,7 +41,7 @@ public class AlumnoDTO {
 	private String obraSoc;
 	
 	@Column 
-	private ImageIcon certMedico;
+	private File certMedico;
 	
 	@Column
 	private String nombreMayor;
@@ -47,27 +50,32 @@ public class AlumnoDTO {
 	private String apellidoMayor;
 	
 	@Column
-	private int dniMayor;
+	private String dniMayor;
 	
 	@Column
 	private String mailMayor;
 	
 	@Column
-	private int telefonoMayor;
+	private String telefonoMayor;
 	
-	@Column
-	private String curso;
+//	@Column
+	@ManyToOne
+	private CursoDTO curso;
 	
 	@Column
 	private String fechaPago;
 	
 	
 	public boolean mayorDeEdad() {
+		return this.edad() >= 18;
+	}
+	
+	public int edad() {
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate fechaNac = LocalDate.parse(this.fechaNac, fmt);
 		LocalDate ahora = LocalDate.now();
 		Period periodo = Period.between(fechaNac, ahora);
-		return periodo.getYears() >= 18;
+		return periodo.getYears();
 	}
 	public String getNombre() {
 		return nombre;
@@ -109,19 +117,19 @@ public class AlumnoDTO {
 		this.obraSoc = obraSoc;
 	}
 
-	public int getNumSoc() {
-		return numSoc;
+	public int getNumSocio() {
+		return numSocio;
 	}
 
-	public void setNumSoc(int numSoc) {
-		this.numSoc = numSoc;
+	public void setNumSocio(int numSoc) {
+		this.numSocio = numSoc;
 	}
 
-	public ImageIcon getCertMedico() {
+	public File getCertMedico() {
 		return certMedico;
 	}
 
-	public void setCertMedico(ImageIcon certMedico) {
+	public void setCertMedico(File certMedico) {
 		this.certMedico = certMedico;
 	}
 
@@ -141,11 +149,11 @@ public class AlumnoDTO {
 		this.apellidoMayor = apellidoMayor;
 	}
 
-	public int getDniMayor() {
+	public String getDniMayor() {
 		return dniMayor;
 	}
 
-	public void setDniMayor(int dniMayor) {
+	public void setDniMayor(String dniMayor) {
 		this.dniMayor = dniMayor;
 	}
 
@@ -157,27 +165,26 @@ public class AlumnoDTO {
 		this.mailMayor = mailMayor;
 	}
 
-	public int getTelefonoMayor() {
+	public String getTelefonoMayor() {
 		return telefonoMayor;
 	}
 
-	public void setTelefonoMayor(int telefonoMayor) {
+	public void setTelefonoMayor(String telefonoMayor) {
 		this.telefonoMayor = telefonoMayor;
 	}
-	public String getCurso() {
+	public CursoDTO getCurso() {
 		return curso;
 	}
-	public void setCurso(String curso) {
+	public void setCurso(CursoDTO curso) {
 		this.curso = curso;
 	}
+	
 	public String getFechaPago() {
 		return fechaPago;
 	}
 	public void setFechaPago(String fechaPago) {
 		this.fechaPago = fechaPago;
 	}
-	
-	
 	
 	
 }
