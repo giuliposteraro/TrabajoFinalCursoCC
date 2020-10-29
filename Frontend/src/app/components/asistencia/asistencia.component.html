@@ -1,37 +1,28 @@
-<div class="px-2 mx-auto my-2 row">
-    <h5 class="font-weight-bold col my-auto">Asistencia del curso: {{curso?curso.id + ' - ' + curso.nivel + ' ' + curso.categoria:''}}</h5>
-</div>
-<div class="table-responsive p-0 mb-2 border rounded">
-    <table class="table table-striped m-0" *ngIf="alumnos && asistencia">
-        <thead>
+<div class="card my-5">
+  <div class="card-body">
+        <table class="table table-bordered table-striped">
+        <thead class="table-success">
             <tr>
-                <th scope="col" class="text-center align-middle">Socio N°</th>
-                <th scope="col" class="text-center align-middle">Nombre y apellido</th>
-                <th scope="col" class="text-center align-middle" *ngFor="let clase of generarArray(getNumeroClases()), index as i">{{i+1}}</th>
-                <th scope="col" class="text-center align-middle">
-                    Asistencia total
-                </th>
+            <th scope="col">Id asistencia</th>
+            <th scope="col">Número de socio</th>
+            <th scope="col">Alumno</th>
+            <th scope="col">Curso</th>
+            <th scope="col">Fecha</th>
             </tr>
         </thead>
-        <tbody *ngIf="alumnos.length>0">
-            <tr *ngFor="let alumno of alumnos">
-                <td class="text-center align-middle" colspan="1">{{alumno.numeroSocio}}</td>
-                <td class="text-center align-middle" colspan="1">{{alumno.apellido}}, {{alumno.nombre}}</td>
-                <td class="text-center align-middle text-light font-weight-bold border-right" style="cursor: pointer;" colspan="1" *ngFor="let clase of getClasesAlumno(alumno.numeroSocio)" [ngClass]="{'bg-danger': !clase.presente, 'bg-success': clase.presente}" (click)="changeState(clase, alumno)">{{clase.presente?'P':'A'}}</td>
-                <td class="text-center align-middle text-light font-weight-bold" *ngFor="let clase of generarArray(getClasesAlumno(alumno.numeroSocio)!=0?0:getNumeroClases())"></td>
-                <td class="text-center align-middle" colspan="1">{{getPorcentajeAsistencia(alumno.numeroSocio)}}%</td>
+        <tbody>
+            <tr *ngFor="let asistencia of asistencias| async">
+            <td>{{ asistencia.id }}</td>
+            <td>{{ asistencia.numSocio }}</td>
+            <td>{{ asistencia.nombreAlumno }}</td>
+            <td>{{ asistencia.curso.nivel }} de {{ asistencia.curso.categoria }} de {{ asistencia.curso.edades }} años los dias {{ asistencia.curso.dias }}
+           de valor $ {{ asistencia.curso.valor }}</td>
+            <td>{{ asistencia.fecha }}</td>
+            &nbsp;
+            <button type="text" (click)="confirm(asistencia.id)" class="p-button-danger" pButton icon="pi pi-trash" label="Eliminar"></button> 
             </tr>
-        </tbody><tbody *ngIf="alumnos.length==0">
-            <tr>
-                <td class="text-center align-middle" colspan="100">El curso no posee alumnos</td>
-            </tr>
+             <p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
         </tbody>
-    </table>
-</div>
-<div class="col-12 row mx-auto"> 
-    <div class="m-0 p-0 col">
-    </div>
-    <div class="m-0 p-0 col">
-       <!-- <button class="btn float-right"  (click)="submit()">Guardar</button> -->
+        </table>
     </div>
 </div>

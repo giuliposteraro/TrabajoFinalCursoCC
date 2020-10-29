@@ -2,9 +2,19 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
+      <option name="id" value="maven.uqbar.org-snapshots" />
+      <option name="name" value="maven.uqbar.org-snapshots" />
+      <option name="url" value="http://maven.uqbar.org/snapshots" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven.uqbar.org-releases" />
+      <option name="name" value="maven.uqbar.org-releases" />
+      <option name="url" value="http://maven.uqbar.org/releases" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="central" />
@@ -15,6 +25,11 @@
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="java-restclient-mvn-repo" />
+      <option name="name" value="java-restclient-mvn-repo" />
+      <option name="url" value="https://raw.github.com/mercadolibre/java-restclient/mvn-repo/" />
     </remote-repository>
   </component>
 </project>

@@ -15,10 +15,11 @@ export class CursoComponent implements OnInit {
   
   cursos: Observable<Curso[]>;
   isupdated: boolean = false;   
-  curso : Curso=new Curso();  
-
+  curso:Curso = new Curso(); 
+ 
   constructor(private cursoService: CursoService,
-              private router: Router) { }
+              private router: Router) {
+              }
 
   ngOnInit(): void {  
     this.reloadData();
@@ -60,4 +61,5 @@ export class CursoComponent implements OnInit {
   editCurso(curso: Curso){
     this.router.navigate(['/cursos', this.cursoService.getCursoById(curso.id)])
   }
+
 }

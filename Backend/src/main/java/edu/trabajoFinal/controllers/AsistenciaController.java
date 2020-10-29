@@ -17,27 +17,27 @@ import edu.trabajoFinal.dao.AsistenciaDTO;
 import edu.trabajoFinal.repository.AsistenciaDTORepository;
 import edu.trabajoFinal.responses.Response;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class AsistenciaController {
+
 	@Autowired
 	private AsistenciaDTORepository repoAsistencias;
 
-	
 	@Autowired
 	private Response respuesta;
 	
-	@GetMapping(value= "asistencia")
+	@GetMapping(value= "/asistencias")
 	public List<AsistenciaDTO> obtenerAsistencias(){
 		return this.repoAsistencias.findAll();
 	}
 	
-	@GetMapping(value= "asistencia/{id}")
+	@GetMapping(value= "/asistencias/{id}")
 	public AsistenciaDTO obtenerAsistenciaPorId(@PathVariable int id) {
 		return this.repoAsistencias.findById(id).get();
 	}
 	
-	@PostMapping(value="asistencia")
+	@PostMapping(value="/asistencias")
 	public ResponseEntity<Response> altaAsistencia(@RequestBody AsistenciaDTO asistencia){
 		try {
 			repoAsistencias.save(asistencia);
@@ -52,13 +52,13 @@ public class AsistenciaController {
 		return ResponseEntity.ok(this.respuesta);
 	}
 	
-	@PutMapping(value= "Asistencias/{id}")
+	/*@PutMapping(value= "/asistencias/{id}")
 	public ResponseEntity<Response> modificarAsistencia(@RequestBody AsistenciaDTO asistencia){
 		try {
 			AsistenciaDTO amodificar = this.repoAsistencias.findById(asistencia.getId()).get();
 			amodificar.setCurso(asistencia.getCurso());
-			amodificar.setPresente(asistencia.isPresente());
 			amodificar.setNumSocio(asistencia.getNumSocio());
+			amodificar.setFecha(asistencia.getFecha());
 			this.repoAsistencias.save(amodificar);
 			this.respuesta.setMensaje("Modifico correctamente");
 			this.respuesta.setStatusCode(200);
@@ -69,12 +69,12 @@ public class AsistenciaController {
 		}
 		
 		return ResponseEntity.ok(this.respuesta);
-	}
+	}*/
 	
-	@DeleteMapping(value= "asistencias/{id}")
-	public ResponseEntity<Response> eliminarAsistencia(@RequestBody AsistenciaDTO asistencia){
+	@DeleteMapping(value= "/asistencias/{id}")
+	public ResponseEntity<Response> eliminarAsistencia(@PathVariable int id){
 		try {
-			repoAsistencias.deleteById(asistencia.getId());
+			repoAsistencias.deleteById(id);
 			this.respuesta.setMensaje("Asistencia eliminada correctamente");
 			this.respuesta.setStatusCode(200);
 		}

@@ -1,6 +1,6 @@
 <div class="card my-5">
   <div class="card-body">
-    <form #alumnoForm="ngForm" (ngSubmit)="onSubmit()">
+    <form #alumnoForm="ngForm" >
       <div class="form-group">
         <h2>Editar Alumno</h2>
         <label for="nombre">Nombre</label>
@@ -27,18 +27,19 @@
         <input type="text" class="form-control" [(ngModel)]="alumno.obraSoc" required name="obraSoc" #name>
           <div class="invalid-feedback">Obra social invalida</div>
       </div>
-     <div class="form-group">
+    <!--<div class="form-group">
         <label for="exampleFormControlFile1">Certificado médico</label>
-        <input (change)="onFileChange($event)" type="file" 
+        <input type="file" 
         class="form-control-file"
-        required name="certMedico" #name>
-        <div class="invalid-feedback">Archivo invalido</div> <!--[(ngModel)]="alumno.certMedico"-->
-      </div> 
-  <!-- <div class="form-group">
-      <label for="curso">Curso</label> -->
+        [(ngModel)]="alumno.certMedico"
+        accept= "image/*"
+        required name="certMedico" #name> 
+        <div class="invalid-feedback">Archivo invalido</div> 
+        <h3>{{ alumno.certMedico.name }} </h3>
+      </div> -->
     <div class="form-group">
       <label for="curso">Curso</label>
-      <select class="form-control" (change)="onChange($event.target.value)">
+      <select class="form-control" [(ngModel)]="alumno.curso" required name="curso" #name>
         <option [ngValue]="curso" *ngFor="let curso of cursos">
          {{curso.nivel}} de {{curso.categoria}} de {{curso.edades}} años los dias {{curso.dias}} de valor $ {{curso.valor}}
         </option>
@@ -81,12 +82,13 @@
           <button type="button" class="btn btn-primary" (click)="actualizarFechaPago()" [disabled]="fechaDeHoy()">
           Pagar cuota del mes 
           </button>
-      </div>
+        </div> 
   <!-- </div> --> 
-      <button type="submit" class="btn btn-success">Guardar</button>
-      &nbsp;
-      <button type="button" class="btn btn-link" [routerLink]="['/alumnos']" >Cancelar</button>
-  <!--</form>-->
+    <button type="text" class="p-button-success" (click)="confirm()" pButton icon="pi pi-check" label="Guardar"></button> 
+    <!--<button type="submit" class="btn btn-success">Guardar</button> -->
+    &nbsp;
+    <button type="button" class="btn btn-link" [routerLink]="['/alumnos']" >Cancelar</button> 
   <!--</div> -->
 </div>
+  <p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog> 
 

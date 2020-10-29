@@ -47,6 +47,7 @@ export class CursoService {
    // );
   } 
 
+
   public updateCurso(id: number, value: any): Observable<Object>{
     return this.http.put(`${this.baseUrl}/${id}`, value, httpOptions)
     .pipe(
@@ -64,4 +65,5 @@ export class CursoService {
   public addCurso(curso: Object): Observable<Object> {  
     return this.http.post(`${this.baseUrl}`, curso, httpOptions);  
   }  
+
 }

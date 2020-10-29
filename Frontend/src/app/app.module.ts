@@ -6,7 +6,10 @@ import { DatePipe } from '@angular/common';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FileUploadModule } from 'primeng/fileupload';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import {InplaceModule} from 'primeng/inplace';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +26,7 @@ import { AsistenciaComponent } from './components/asistencia/asistencia.componen
 import { AsistenciaService } from './services/asistencia.service';
 import { EditarCursoComponent } from './components/cursos-component/editar-curso/editar-curso.component';
 import { EditarAlumnoComponent } from './components/alumno-components/editar-alumno/editar-alumno.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 
 @NgModule({
@@ -36,7 +40,8 @@ import { EditarAlumnoComponent } from './components/alumno-components/editar-alu
     CursoFormComponent,
     AsistenciaComponent,
     EditarCursoComponent,
-    EditarAlumnoComponent
+    EditarAlumnoComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +52,10 @@ import { EditarAlumnoComponent } from './components/alumno-components/editar-alu
     FormsModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
-    FileUploadModule
+    FileUploadModule,
+    TableModule
   ],
-  providers: [AsistenciaService, DatePipe, MessageService, ConfirmationService],
+  providers: [DatePipe, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

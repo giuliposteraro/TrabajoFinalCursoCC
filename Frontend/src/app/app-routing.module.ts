@@ -9,6 +9,8 @@ import { CursoFormComponent } from './components/cursos-component/curso-form/cur
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
 import { EditarCursoComponent } from './components/cursos-component/editar-curso/editar-curso.component';
 import { EditarAlumnoComponent } from './components/alumno-components/editar-alumno/editar-alumno.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 
 const routes: Routes = [
@@ -21,7 +23,8 @@ const routes: Routes = [
   {path: 'cursos/nuevo', component: CursoFormComponent},
   {path: 'cursos/:id', component: EditarCursoComponent},
   {path: 'asistencias', component: AsistenciaComponent},
-  {path: 'cursos/asistencia/:idCurso', component: AsistenciaComponent},
+  {path: 'asistencias/:numSocio', component: AsistenciaComponent},
+  {path: 'reportes', component: ReportesComponent},
   {path: '**', redirectTo: '/'}
 ];
 

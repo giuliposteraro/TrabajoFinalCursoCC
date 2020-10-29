@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Asistencia } from '../../models/asistencia';
-import { Alumno } from 'src/app/models/alumno';
-import { Curso } from 'src/app/models/curso';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlumnoService } from 'src/app/services/alumno.service';
-import { CursoService } from 'src/app/services/curso.service';
 import { AsistenciaService } from 'src/app/services/asistencia.service';
+import { Observable } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
+import { AlumnoService } from 'src/app/services/alumno.service';
+import { Curso } from 'src/app/models/curso';
+
 
 @Component({
   selector: 'app-asistencia',
@@ -15,34 +15,37 @@ import { AsistenciaService } from 'src/app/services/asistencia.service';
 })
 export class AsistenciaComponent implements OnInit {
 
-  asistencia: Asistencia;
-  alumnos: Alumno[];
-  curso: Curso;
+  asistencias: Observable<Asistencia[]>;
   totales: any = [];
+  nombreAlumno: string;
 
-  constructor(private route: ActivatedRoute, 
-              private router:Router, 
-              private asistenciaService: AsistenciaService, 
-              private alumnoService: AlumnoService, 
-              private cursoService: CursoService) { }
+  constructor(private asistenciaService: AsistenciaService, 
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params =>{
-      this.curso.id = +params['idCurso'];
-      if(!this.curso.id){
-        this.router.navigate(['cursos']);
-      }
-    })
-  // this.asistenciaService.getAsistenciaByCurso(this.curso.id).subscribe(data => {
-  //   // console.log("curso: ", data)
-  //   this.asistencia = data;
-  //   this.alumnoService.getAlumnosByIdCurso(this.curso.id).subscribe(data => {
-  //     this.alumnos.push(data);
-  //     this.cursoService.getCursoById(this.curso.id).subscribe(data =>{
-  //       this.curso = data;
-  //       });
-  //     })
-  //   })
+    this.reloadData();
   }
 
-}
+  reloadData(){
+    this.asistencias = this.asistenciaService.getAsistencias();
+  }
+
+  deleteAsistencia(id: number): void {
+    this.asistenciaService.delete(id)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.reloadData();
+      },
+      error => console.log(error));
+  }
+
+  confirm(id: number) {
+    this.confirmationService.confirm({
+        message: 'Confirmar eliminación?', 
+        accept: () => {
+            this.deleteAsistencia(id);
+        }
+    });
+  }
+} 

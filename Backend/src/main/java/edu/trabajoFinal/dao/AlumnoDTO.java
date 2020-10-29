@@ -1,19 +1,12 @@
 package edu.trabajoFinal.dao;
 
 
-import java.io.File;
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 
 @Entity
@@ -41,7 +34,7 @@ public class AlumnoDTO {
 	private String obraSoc;
 	
 	@Column 
-	private File certMedico;
+	private String certMedico;
 	
 	@Column
 	private String nombreMayor;
@@ -57,14 +50,15 @@ public class AlumnoDTO {
 	
 	@Column
 	private String telefonoMayor;
-	
-//	@Column
+
 	@ManyToOne
 	private CursoDTO curso;
 	
 	@Column
 	private String fechaPago;
-	
+
+	@Column
+    private String fechaAsistencia;
 	
 	public boolean mayorDeEdad() {
 		return this.edad() >= 18;
@@ -121,15 +115,11 @@ public class AlumnoDTO {
 		return numSocio;
 	}
 
-	public void setNumSocio(int numSoc) {
-		this.numSocio = numSoc;
-	}
-
-	public File getCertMedico() {
+	public String getCertMedico() {
 		return certMedico;
 	}
 
-	public void setCertMedico(File certMedico) {
+	public void setCertMedico(String certMedico) {
 		this.certMedico = certMedico;
 	}
 
@@ -175,6 +165,7 @@ public class AlumnoDTO {
 	public CursoDTO getCurso() {
 		return curso;
 	}
+
 	public void setCurso(CursoDTO curso) {
 		this.curso = curso;
 	}
@@ -185,6 +176,12 @@ public class AlumnoDTO {
 	public void setFechaPago(String fechaPago) {
 		this.fechaPago = fechaPago;
 	}
-	
-	
+
+	public String getFechaAsistencia() {
+		return fechaAsistencia;
+	}
+
+	public void setFechaAsistencia(String fechaAsistencia) {
+		this.fechaAsistencia = fechaAsistencia;
+	}
 }

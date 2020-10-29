@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="TrabajoFinalCursoCC" />
+        <module name="TPGrupo8" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="TPGrupo8" target="8" />
       <module name="TrabajoFinalCursoCC" target="8" />
     </bytecodeTargetLevel>
   </component>

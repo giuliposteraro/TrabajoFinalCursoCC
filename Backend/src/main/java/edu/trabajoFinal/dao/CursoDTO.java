@@ -29,6 +29,9 @@ public class CursoDTO {
 	
 	@Column
 	private int valor; 
+	
+	@Column
+	private int totalAlumnos;
 
 	public int getId() {
 		return id;

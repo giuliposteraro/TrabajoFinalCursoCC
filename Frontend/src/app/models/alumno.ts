@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Curso } from './curso';
 
 export class Alumno {
@@ -8,7 +9,7 @@ export class Alumno {
     public fechaNac:string;
     public mail:string;
     public obraSoc:string;
-    public certMedico:string;
+    public certMedico:ImageData;
     public nombreMayor:string;
     public apellidoMayor:string;
     public dniMayor:string;
@@ -16,7 +17,6 @@ export class Alumno {
     public telefonoMayor:string;
     public curso:Curso;
     public fechaPago:string;
-
-
+    public fechaAsistencia:string;
 
 }

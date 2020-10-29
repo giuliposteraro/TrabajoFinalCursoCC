@@ -1,20 +1,28 @@
 <div [hidden]="submitted" class="card my-5">
   <div class="card-body">
-    <form #alumnoForm="ngForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" #alumnoForm="ngForm">
       <div class="form-group">
         <h2>Nuevo alumno</h2>
         <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" placeholder="Escriba su nombre" [(ngModel)]="alumno.nombre" required name="nombre" #name>
+        <input type="text" [(ngModel)]="alumno.nombre" 
+          class="form-control" 
+          placeholder="Escriba su nombre"
+          required name="nombre" #name>
           <div class="invalid-feedback">Nombre invalido</div>
       </div>
         <div class="form-group">
         <label for="apellido">Apellido</label>
-        <input type="text" class="form-control" placeholder="Escriba su apellido" [(ngModel)]="alumno.apellido" required name="apellido" #name>
+        <input type="text" [(ngModel)]="alumno.apellido" 
+          class="form-control"  
+          placeholder="Escriba su apellido"
+          required name="apellido" #name>
           <div class="invalid-feedback">Apellido invalido</div>
       </div>
       <div class="form-group">
           <label for="fechaNac">Fecha de nacimiento</label>
-          <input class="form-control" type="date" value="19-08-2011" [(ngModel)]="alumno.fechaNac" required name="fechaNac" #name>
+          <input class="form-control" type="date" [(ngModel)]="alumno.fechaNac"
+              value="2011-08-19" 
+              required name="fechaNac" #name>
             <div class="invalid-feedback">Fecha de nacimiento invalida</div>
       </div>
         <div class="form-group">
@@ -33,16 +41,14 @@
           required name="obraSoc" #name>
           <div class="invalid-feedback">Obra social invalida</div>
       </div>
-      <div class="form-group">
+    <div class="form-group">
         <label for="exampleFormControlFile1">Certificado médico</label>
-        <input (change)="onFileChange($event)" type="file" 
+        <input type="file" [(ngModel)]="alumno.certMedico"
         class="form-control-file"
+        accept= "image/*"
         required name="certMedico" #name>
-        <div class="invalid-feedback">Archivo invalido</div> <!--[(ngModel)]="alumno.certMedico"-->
-      </div> 
-    <!-- <h5>Certificado Médico</h5>
-    <p-fileUpload mode="basic" name="alumno.certMedico" url="./upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)"
-        [auto]="true" chooseLabel="Seleccionar Archivo"></p-fileUpload> -->
+      <div class="invalid-feedback">Archivo invalido</div>
+    </div>
     <div class="form-group">
       <label for="curso">Curso</label>
       <select class="form-control" [(ngModel)]="alumno.curso" required name= "curso" #name>
@@ -98,26 +104,26 @@
            required name="telefonoMayor" #name>
           <div class="invalid-feedback">Telefono invalido</div>
       </div>
-       <div class="form-group">
+    <div class="form-group">
           <label for="fechaNac">Fecha de último pago</label>
           <input class="form-control" type="date" [(ngModel)]="alumno.fechaPago"
               name= "fecha"
               id="fechaPago"
-              value="19-08-2011" 
+              value="2011-08-19" 
               required name="fechaPago" #name>
             <div class="invalid-feedback">No actualizo fecha de pago</div> 
             <br>
            <button type="button" class="btn btn-primary" [disabled]="alumno.fechaPago" (click)="actualizarFechaPago()">
             Pagar cuota del mes 
            </button>
-      </div>
+      </div> 
   </div>
       <button type="submit" class="btn btn-success"[disabled]="!alumnoForm.form.valid" >Cargar</button>
       &nbsp;
       <button type="button" class="btn btn-link" [routerLink]="['/alumnos']" >Cancelar</button>
- <!--</form> -->
-<!-- </div> 
-</div> -->
+  </form>
+  </div>
+</div>
 <div [hidden]="!submitted">
-  <h4>You submitted successfully!</h4>
+    <h4>You submitted successfully!</h4>
 </div>

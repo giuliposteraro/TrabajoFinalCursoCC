@@ -27,25 +27,31 @@
           <td>{{ alumno.fechaNac }}</td>
           <td>{{ alumno.mail }}</td>
           <td>{{ alumno.obraSoc }}</td>
-          <td>{{ alumno.certMedico}}</td>
-          <td>{{ alumno.curso.nivel }} de {{alumno.curso.categoria}} de {{alumno.curso.edades}} años los dias {{alumno.curso.dias}}
-           de valor $ {{alumno.curso.valor}}</td>
+          <td>{{ alumno.certMedico }}</td>
+          <td>{{ alumno.curso.nivel }} de {{ alumno.curso.categoria }} de {{ alumno.curso.edades }} años los dias {{ alumno.curso.dias }}
+           de valor $ {{ alumno.curso.valor }}</td> 
           <td>{{ alumno.nombreMayor ? alumno.nombreMayor : '-'}}</td>
           <td>{{ alumno.apellidoMayor ? alumno.apellidoMayor : '-'}}</td>
           <td>{{ alumno.dniMayor ? alumno.dniMayor : '-'}}</td>
           <td>{{ alumno.mailMayor ? alumno.mailMayor : '-'}}</td>
           <td>{{ alumno.telefonoMayor ? alumno.telefonoMayor : '-'}}</td>
           <td>{{ alumno.fechaPago }}</td><!--<button type="button" class="btn btn-dark" (click)="updateAlumno(alumno.numSocio)">Modificar</button> -->
-          <button pButton type="button" label="Modificar" class="p-button-help pi pi-refresh" (click)="updateAlumno(alumno.numSocio)"></button>       
+          <button pButton type="button" label="Modificar" class="p-button-help" icon= "pi pi-refresh" (click)="updateAlumno(alumno.numSocio)"></button>       
           &nbsp; 
-          <p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-          <button type="text" (click)="confirm(alumno.numSocio)" class="p-button-danger" pButton icon="pi pi-trash" label="Eliminar"></button> 
-         <!--<button type="button" class="btn btn-danger" (click) ="deleteAlumno(alumno.numSocio)">Eliminar</button> -->
+          &nbsp;
+          <button pButton type="text" (click)="confirm(alumno.numSocio)" class="p-button-danger" icon="pi pi-trash" label="Eliminar"></button> 
+          &nbsp;
+          &nbsp;
+          <button pButton type="submit" label="Dar Presente" class="p-button-success" icon="pi pi-check" (click)="darPresente(alumno)"
+          [disabled]="!tieneCuotaAlDia(alumno)"></button> 
         </tr>
       </tbody>
     </table>
-     <footer>
+    <footer>
       <button type="button" class="btn btn-info" [routerLink]="['/alumnos/nuevo']" >Nuevo Alumno</button>
     </footer>
   </div>
 </div>
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+

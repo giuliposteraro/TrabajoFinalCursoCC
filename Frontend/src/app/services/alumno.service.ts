@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { Alumno } from '../models/alumno';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable, of} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
@@ -29,20 +28,23 @@ export class AlumnoService {
   }
 
   public getAlumnos(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}`)
+    .pipe(
+      catchError(this.handleError('getAlumnoById'))
+    );
   }
 
   public getAlumnoById(numSocio: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${numSocio}`)
-    // .pipe(
-    //   catchError(this.handleError)
-    // );
+    .pipe(
+      catchError(this.handleError('getAlumnoById'))
+    );
   } 
 
   public updateAlumno(numSocio: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/${numSocio}`, value, httpOptions)
     .pipe(
-      catchError(this.handleError('updateCurso', value))
+      catchError(this.handleError('updateAlumno', value))
     );
   }
 
@@ -52,10 +54,8 @@ export class AlumnoService {
  
   public addAlumno(alumno: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}`,alumno, httpOptions)
+    .pipe(
+      catchError(this.handleError('addAlumno', alumno))
+    );
   }
-
-  // getAlumnosByIdCurso(id: number): Observable<Alumno>{
-  //   const urlGet = '${this.url}/curso/${id}'
-  //   return this.http.get<Alumno>(urlGet).pipe(catchError(this.handleError));
-  // }
 }

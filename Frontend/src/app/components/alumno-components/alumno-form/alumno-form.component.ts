@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { Curso } from 'src/app/models/curso'; 
 import { CursoService } from 'src/app/services/curso.service';
 import { DatePipe } from '@angular/common';
-import { MessageService } from 'primeng/api';
-
 
 @Component({
   selector: 'app-alumno-form',
@@ -14,22 +12,18 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./alumno-form.component.scss']
 })
 export class AlumnoFormComponent implements OnInit{
-  
 
   alumno:Alumno = new Alumno();
-  cursos:Curso[]= [];
+  cursos:Curso[];
   datosAlumno: any = null;
   submitted = false; 
-  edad: number;
+  edad:number;
   curso:Curso = new Curso();
-  files: any[];
-  uploadedFiles: any[] = [];
 
   constructor(private router: Router,
               private alumnoService: AlumnoService,
               private cursoService: CursoService,
-              private datePipe: DatePipe,
-              private messageService: MessageService) {
+              private datePipe: DatePipe) {
 
                }
 
@@ -39,10 +33,9 @@ export class AlumnoFormComponent implements OnInit{
   onSubmit(){
     this.submitted = true;
     this.save();  
-    // this.alumnoService.addAlumno(this.alumno).subscribe(result => this.gotoAlumnoList());
   }
 
-  getEdad(fecha: string){
+  getEdad(fecha:string){
     let today = new Date(); 
     let date = new Date(fecha);
     return today.getFullYear() - date.getFullYear(); 
@@ -72,19 +65,8 @@ export class AlumnoFormComponent implements OnInit{
 
   actualizarFechaPago(){
     let today = new Date();
-    let fechaTransf = this.datePipe.transform(today,"dd-MM-yyyy")
+    let fechaTransf = this.datePipe.transform(today,"yyyy-MM-dd")
     this.alumno.fechaPago = fechaTransf;
   }
 
-  onUpload(event) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
-    }
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-  }
-
-  onFileChange(event){
-    this.files = event.target.files;
-    console.log(event);
-  }
 }

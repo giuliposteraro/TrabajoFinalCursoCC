@@ -11,24 +11,24 @@ public class AsistenciaDTO {
 	private int id;
 	
 	@Column
-	private String numSocio;
-	
+	private int numSocio;
+
+	@Column
+	private String nombreAlumno;
+
 	@ManyToOne
 	private CursoDTO curso;
 
 	@Column
-	private boolean presente;
+	private String fecha;
 
 	@Column
-	private String fecha;
+    private int totalAsistencia;
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public CursoDTO getCurso() {
 		return curso;
@@ -38,24 +38,23 @@ public class AsistenciaDTO {
 		this.curso = curso;
 	}
 
-	public boolean isPresente() {
-		return presente;
-	}
-
-	public void setPresente(boolean presente) {
-		this.presente = presente;
-	}
-
-	public void setNumSocio(String numSocio) {
+	public void setNumSocio(int numSocio) {
 		this.numSocio = numSocio;
 	}
 
-	public String getNumSocio() {
+	public int getNumSocio() {
 		return numSocio;
 	}
 
 	public String getFecha() { return fecha; }
 
 	public void setFecha(String fecha) { this.fecha = fecha; }
-	
+
+    public String getNombreAlumno() {
+        return nombreAlumno;
+    }
+
+    public void setNombreAlumno(String nombreAlumno) {
+        this.nombreAlumno = nombreAlumno;
+    }
 }

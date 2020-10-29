@@ -5,5 +5,4 @@ export class Curso {
     public categoria:string;
     public edades:string;
     public valor:number;
-
 }

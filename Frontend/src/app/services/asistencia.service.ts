@@ -12,12 +12,14 @@ const httpOptions = {
   })
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AsistenciaService {
-  private url: string;
+  private baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.url = "http://localhost:8080/asistencias";
+    this.baseUrl = "http://localhost:8080/asistencias";
    }
 
    private handleError<T>(operation = 'operation', result?: T) {
@@ -32,17 +34,31 @@ export class AsistenciaService {
     };
   }
 
-  public getAsistencia(): Observable<Asistencia[]> {
-    return this.http.get<Asistencia[]>(this.url)
+  public getAsistencias(): Observable<any> {
+    return this.http.get(`${this.baseUrl}`);
+  }
+
+  public getAsistenciaByCurso(id:number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}`)
+  } 
+
+  public getAsistenciaByAlumno(numSocio:number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/${numSocio}`)
+  }
+
+  public addAsistencia(asistencia: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`,asistencia, httpOptions)
+  }
+
+  public updateAsistencia(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/${id}`, value, httpOptions)
     .pipe(
-      catchError(this.handleError<Asistencia[]>('getCursos', []))
+      catchError(this.handleError('updateAsistencia', value))
     );
   }
 
-  public getAsistenciaByCurso(id: number): Observable<Asistencia> {
-    const urlGet = '${this.url}/${id}';
-    return this.http.get<Asistencia>(urlGet).pipe(
-      catchError(this.handleError<Asistencia>(`getAsistencia id=${id}`))
-    );
-  } 
+  public delete(id:number):Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' })
+   }
+
 }
