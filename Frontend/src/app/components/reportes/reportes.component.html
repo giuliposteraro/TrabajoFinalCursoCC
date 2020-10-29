@@ -1,2 +1,23 @@
-<h3>Total alumnos por curso: </h3>
+<div class="table-responsive p-0 mt-3 mb-2 border rounded">
+    <table class="table table-striped m-0">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center align-middle">Nivel</th>
+                <th scope="col" class="text-center align-middle">Cursos</th>
+                <th scope="col" class="text-center align-middle">Alumnos</th>
+                <th scope="col" class="text-center align-middle">Asistencias</th>
+                <th scope="col" class="text-center align-middle">Clases</th>
+                <th scope="col" class="text-center align-middle">Asistencia total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let total of totales">
+                <td class="text-center align-middle text-capitalize">{{ total.nivel }}</td>
+                <td class="text-center align-middle">{{ total.cantCursos }}</td>
+                <td class="text-center align-middle">{{ total.cantAlumnos }}</td>
+                <td class="text-center align-middle">{{ total.cantPresentes }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 

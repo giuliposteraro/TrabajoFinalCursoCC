@@ -9,7 +9,7 @@ export class Alumno {
     public fechaNac:string;
     public mail:string;
     public obraSoc:string;
-    public certMedico:ImageData;
+    public certMedico:string;
     public nombreMayor:string;
     public apellidoMayor:string;
     public dniMayor:string;
@@ -18,5 +18,4 @@ export class Alumno {
     public curso:Curso;
     public fechaPago:string;
     public fechaAsistencia:string;
-
 }

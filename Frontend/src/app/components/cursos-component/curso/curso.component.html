@@ -21,7 +21,7 @@
           <td>{{ curso.valor }}</td>
           <button type="button" class="btn btn-dark" (click)="updateCurso(curso.id)">Modificar</button> <!--[routerLink]= "['/cursos', curso.id]"-->
           &nbsp;
-          <button type="button" class="btn btn-danger" (click)="deleteCurso(curso.id)">Eliminar</button>
+          <button pButton type="text" (click)="confirm(curso.id)" class="p-button-danger" icon="pi pi-trash" label="Eliminar"></button> 
         </tr>
       </tbody>
     </table>
@@ -31,3 +31,4 @@
   </div>
 </div>
 <div> 
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>

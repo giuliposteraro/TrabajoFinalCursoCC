@@ -27,7 +27,7 @@
         <input type="text" class="form-control" [(ngModel)]="alumno.obraSoc" required name="obraSoc" #name>
           <div class="invalid-feedback">Obra social invalida</div>
       </div>
-    <!--<div class="form-group">
+    <div class="form-group">
         <label for="exampleFormControlFile1">Certificado médico</label>
         <input type="file" 
         class="form-control-file"
@@ -35,11 +35,14 @@
         accept= "image/*"
         required name="certMedico" #name> 
         <div class="invalid-feedback">Archivo invalido</div> 
-        <h3>{{ alumno.certMedico.name }} </h3>
-      </div> -->
+        <h3><b>Archivo seleccionado: </b> {{ alumno.certMedico }} </h3>
+      </div> 
     <div class="form-group">
       <label for="curso">Curso</label>
       <select class="form-control" [(ngModel)]="alumno.curso" required name="curso" #name>
+        <option [ngValue]="alumno.curso" hidden>{{ alumno.curso.nivel }} de {{alumno.curso.categoria}} de {{alumno.curso.edades}} 
+        años los dias {{alumno.curso.dias}} de valor $ {{alumno.curso.valor}}
+        </option>
         <option [ngValue]="curso" *ngFor="let curso of cursos">
          {{curso.nivel}} de {{curso.categoria}} de {{curso.edades}} años los dias {{curso.dias}} de valor $ {{curso.valor}}
         </option>

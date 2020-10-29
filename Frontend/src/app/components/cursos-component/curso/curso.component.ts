@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl} from '@angular/forms';
 import { Identifiers } from '@angular/compiler/src/render3/r3_identifiers';
 import { Observable } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-curso',
@@ -18,7 +19,8 @@ export class CursoComponent implements OnInit {
   curso:Curso = new Curso(); 
  
   constructor(private cursoService: CursoService,
-              private router: Router) {
+              private router: Router,
+              private confirmationService: ConfirmationService) {
               }
 
   ngOnInit(): void {  
@@ -62,4 +64,12 @@ export class CursoComponent implements OnInit {
     this.router.navigate(['/cursos', this.cursoService.getCursoById(curso.id)])
   }
 
+  confirm(id: number) {
+    this.confirmationService.confirm({
+        message: 'Confirmar eliminación?', 
+        accept: () => {
+            this.deleteCurso(id);
+        }
+    });
+  }
 }

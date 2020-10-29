@@ -32,8 +32,8 @@ public class AlumnoDTO {
 	
 	@Column
 	private String obraSoc;
-	
-	@Column 
+
+	@Column
 	private String certMedico;
 	
 	@Column

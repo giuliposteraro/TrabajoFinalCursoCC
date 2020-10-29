@@ -4,7 +4,7 @@
     <div class="form-group">
       <h2>Nuevo curso</h2> <!--{{curso.id ? 'Editar' : 'Agregar'}} Curso-->
         <label for="nivel">Nivel</label>
-        <input type="text" class="form-control" [(ngModel)]="curso.nivel" required name="nivel" #name>
+        <input type="text" class="form-control" placeholder="Escriba el nivel" [(ngModel)]="curso.nivel" required name="nivel" #name>
           <div class="invalid-feedback">Nivel invalido</div>
     </div>
     <div class="form-group">

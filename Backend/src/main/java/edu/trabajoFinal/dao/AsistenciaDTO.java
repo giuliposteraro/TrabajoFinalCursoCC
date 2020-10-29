@@ -22,8 +22,6 @@ public class AsistenciaDTO {
 	@Column
 	private String fecha;
 
-	@Column
-    private int totalAsistencia;
 
 	public int getId() {
 		return id;
